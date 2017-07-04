@@ -1,0 +1,45 @@
+.ligaInfo {
+    display: inline-flex;
+}
+
+.list-group-item div {
+    /*border-style: groove;*/
+    cursor: pointer;
+}
+
+.col1 {
+    width: 1vw;
+}
+
+.col2 {
+    width: 10vw;
+    align-self: center;
+}
+
+.col3 {    
+    width: 66vw;
+    align-self: center;
+}
+
+.col4 {
+    width: 8vw;
+    text-align: right;
+    align-self: center;
+}
+
+.col5 {
+    width: 39vw;
+}
+
+.ligaNome {
+    
+    font-stretch: ultra-condensed;
+    font-weight: bold;
+}
+
+.ligaDesc {
+    color: gray;
+    font-style: italic;
+    font-size: 10px;
+    text-align: justify;
+}

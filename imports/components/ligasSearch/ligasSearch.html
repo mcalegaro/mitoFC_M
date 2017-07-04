@@ -1,0 +1,24 @@
+<header>
+    <form ng-submit="$ctrl.searchLigas()">
+        <div class="input-group">
+            <input class="form-control" ng-model="$ctrl.searchLiga" type="text" name="text" placeholder="Pesquise pelo nome da Liga"
+            />
+            <span class="input-group-btn">
+                    <button class="btn btn-default" type="submit">
+                        <span class="glyphicon glyphicon-search"></span>
+                        <span class="badge">{{ligasSearchResult.length > 0 ? ligasSearchResult.length : ''}}</span>
+            </button>
+            </span>
+            <input id="toRefresh" type="hidden" ng-click="$ctrl.refreshData()" />
+        </div>
+    </form>
+</header>
+<div>
+    <div ng-if="msg">
+        <div ng-if="msg.cod=='info'" class="alert alert-info" role="alert">{{msg.desc}}</div>
+        <div ng-if="msg.cod=='erro'" class="alert alert-danger" role="alert">{{msg.desc}}</div>
+    </div>
+    <div ng-repeat="liga in ligasSearchResult" class="list-group">
+        <liga-info liga="liga"></liga-info>
+    </div>
+</div>

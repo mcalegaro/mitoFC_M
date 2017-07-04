@@ -1,0 +1,31 @@
+<div class="tipoLiga" ng-init="liga=$ctrl.liga;" ng-click="$event.stopPropagation();">
+    <div ng-switch="{{liga.mata_mata}}">
+        <div ng-switch-when="true">
+            <div>
+                <span class="glyphicon glyphicon-screenshot" data-container="body" data-toggle="popover" data-placement="left" data-content="Mata-mata">
+                </span>
+            </div>
+            <div>
+                <span class="glyphicon glyphicon-lock" data-container="body" data-toggle="popover" data-placement="left" data-content="Liga Fechada">
+                </span>
+            </div>
+        </div>
+        <div ng-switch-default>
+            <div>
+                <span class="glyphicon glyphicon-th-list" data-container="body" data-toggle="popover" data-placement="left" data-content="Pontos Corridos">
+                </span>
+            </div>
+            <div>
+                <span ng-if="liga.tipo=='Aberta'" class="glyphicon glyphicon-log-in" data-container="body" data-toggle="popover" data-placement="left"
+                    data-content="Liga Aberta">
+                </span>
+                <span ng-if="liga.tipo=='Moderada'" class="glyphicon glyphicon-envelope" data-container="body" data-toggle="popover" data-placement="left"
+                    data-content="Liga Moderada">
+                </span>
+                <span ng-if="liga.tipo=='Fechada'" class="glyphicon glyphicon-lock" data-container="body" data-toggle="popover" data-placement="left"
+                    data-content="Liga Fechada">
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
