@@ -1,5 +1,5 @@
-<a class="list-group-item">
-    <div class="ligaInfo" ng-init="liga=$ctrl.liga" ng-click="$ctrl.showLeague();$event.stopPropagation();">
+<a class="list-group-item" ui-sref="ligaDetails({ slug: $ctrl.liga.slug })">
+    <div class="ligaInfo" ng-init="liga=$ctrl.liga">
         <!--<div class="col1">+</div>-->
         <div class="col2">
             <img src="{{liga.imagem}}" height="35" />

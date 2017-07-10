@@ -1,0 +1,40 @@
+<div id="timeDetails">
+    <div ng-if="msg">
+        <div ng-if="msg.cod=='info'" class="alert alert-info" role="alert">{{msg.desc}}</div>
+        <div ng-if="msg.cod=='erro'" class="alert alert-danger" role="alert">{{msg.desc}}</div>
+    </div>
+    <div ng-if="msg == ''">
+        <div style="display: inline-flex; align-items: center; width: 100%;">
+            <img ng-src="{{time.time.url_escudo_png}}" height="35" />
+            <div style="white-space: nowrap;">
+                <p class="ligaNome">
+                    {{time.time.nome}}
+                </p>
+                <p class="ligaDesc">
+                    {{time.time.nome_cartola}}
+                </p>
+            </div>
+            <div style="text-align: right; width: 100%;">
+                <p style="color: green;">
+                    {{time.pontos.parcial | number:2}}
+                </p>
+                <p style="color: gray;">
+                    {{time.pontos.atletas}}/12
+                </p>
+            </div>
+        </div>
+        <div ng-repeat="atleta in time.atletas | orderBy:['posicao_id']">
+            <div style="display: inline-flex; width: 100%;">
+                <div>
+                    <div class="ligaNome" style="white-space: nowrap;">{{atleta.apelido}}</div>
+                    <div style="display: inline-flex">
+                        <div class="ligaDesc" style="white-space: nowrap;">{{time.clubes[atleta.clube_id].nome}}</div>
+                        <div class="posicaoJogador">{{time.posicoes[atleta.posicao_id].abreviacao | uppercase}}</div>
+                    </div>
+                </div>
+                <div class="posicaoJogador" style="width: 100%; text-align: right;">{{atleta.parciais.scout}}</div>
+                <div style="width: 28px; text-align: right; color: green; align-self: center;">{{atleta.parciais.pontuacao | number:2}}</div>
+            </div>
+        </div>
+    </div>
+</div>

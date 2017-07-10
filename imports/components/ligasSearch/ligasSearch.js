@@ -3,8 +3,12 @@ import angularMeteor from 'angular-meteor';
 import {
     HTTP
 } from 'meteor/http';
-import template from './ligasSearch.html';
+import templateUrl from './ligasSearch.html';
 import ligaInfo from '../ligaInfo/ligaInfo';
+import {
+    EP_LIGAS
+} from '/client/main.js';
+import uiRouter from 'angular-ui-router';
 
 class LigasSearchCtrl {
     constructor($scope) {
@@ -23,24 +27,16 @@ class LigasSearchCtrl {
                 });
             }
         });
-        // this.refreshData = function () {
-        //     // if (this.toRefresh) {
-        //     console.debug('refresh results.');
-        //     $scope.doPopover = true;
-        //     // $scope.ligasSearchResult = this.ligasSearchResult;
-        //     // this.toRefresh = false;
-        //     // }
-        // };
         this.searchLigas = () => {
             $scope.msg = {
                 cod: 'info',
                 desc: 'Carregando...'
             };
             $scope.ligasSearchResult = '';
-            var prx = "http://localhost:3000/api?url=";
-            var prefix = "https://api.cartolafc.globo.com/ligas?q=";
+            $scope.doPopover = false;
+
             try {
-                HTTP.get(prx + prefix + this.searchLiga, {}, (error, response) => {
+                HTTP.get(EP_LIGAS + this.searchLiga, {}, (error, response) => {
                     if (error) {
                         console.log(error);
                         $scope.msg = {
@@ -60,10 +56,6 @@ class LigasSearchCtrl {
                             }
                         }
                         $scope.$digest();
-                        // $scope.toRefresh = true;
-                        // document.activeElement.text = '';
-                        // document.activeElement.blur();
-                        // document.getElementById('toRefresh').click();
                     }
                 })
             } catch (err) {
@@ -74,19 +66,26 @@ class LigasSearchCtrl {
                 };
                 $scope.$digest();
             }
-            // var url = "https://api.cartolafc.globo.com/ligas?q=fornax%20ch";
-            // var url = "http://localhost:3000/proxy?url=https://api.cartolafc.globo.com/ligas?q=fornax%20ch";
-            // var url = "https://mito-api.herokuapp.com/mitoAPI/ligas?q=fornax%20ch";
         };
     }
 }
 
-export default angular.module('ligasSearch', [
-        angularMeteor
+const name = 'ligasSearch';
+export default angular.module(name, [
+        angularMeteor,
+        uiRouter
     ])
-    .component('ligasSearch', {
-        templateUrl: 'imports/components/ligasSearch/ligasSearch.html',
+    .component(name, {
+        templateUrl,
         controller: ['$scope', LigasSearchCtrl]
     })
-
-;
+    .config(
+        function ($stateProvider) {
+            'ngInject';
+            $stateProvider
+                .state('ligasSearch', {
+                    url: '/ligasSearch',
+                    template: '<ligas-search></ligas-search>'
+                });
+        }
+    );

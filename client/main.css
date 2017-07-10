@@ -2,8 +2,11 @@
     display: inline-flex;
 }
 
-.list-group-item div {
+div {
     /*border-style: groove;*/
+}
+
+.list-group-item div {
     cursor: pointer;
 }
 
@@ -16,7 +19,7 @@
     align-self: center;
 }
 
-.col3 {    
+.col3 {
     width: 66vw;
     align-self: center;
 }
@@ -32,7 +35,6 @@
 }
 
 .ligaNome {
-    
     font-stretch: ultra-condensed;
     font-weight: bold;
 }
@@ -42,4 +44,10 @@
     font-style: italic;
     font-size: 10px;
     text-align: justify;
+}
+
+.posicaoJogador {
+    color: gray;
+    font-size: 9px;
+    font-style: inherit;
 }
