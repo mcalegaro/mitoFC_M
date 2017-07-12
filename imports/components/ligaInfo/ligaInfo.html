@@ -1,25 +1,23 @@
-<a class="list-group-item" ui-sref="ligaDetails({ slug: $ctrl.liga.slug })">
-    <div class="ligaInfo" ng-init="liga=$ctrl.liga">
-        <!--<div class="col1">+</div>-->
-        <div class="col2">
-            <img src="{{liga.imagem}}" height="35" />
+<div class="ligaInfo" ng-init="liga=$ctrl.liga">
+    <!--<div class="col1">+</div>-->
+    <div class="col2">
+        <img src="{{liga.imagem}}" height="35" />
+    </div>
+    <div class="col3">
+        <div class="ligaNome">
+            <b>{{liga.nome}}</b>
         </div>
-        <div class="col3">
-            <div class="ligaNome">
-                <b>{{liga.nome}}</b>
-            </div>
-            <div class="ligaDesc">
-                {{liga.descricao}}
-            </div>
+        <div class="ligaDesc">
+            {{liga.descricao}}
         </div>
-        <div class="col4">
-            <liga-tipo liga="liga"></liga-tipo>
-        </div>
-        <!--<div class="col5 tooltip">
+    </div>
+    <div class="col4">
+        <liga-tipo liga="liga"></liga-tipo>
+    </div>
+    <!--<div class="col5 tooltip">
         &nbsp;?&nbsp;
         <span class="tooltiptext">
             {{lg.descricao}}
         </span>
     </div>-->
-    </div>
-</a>
+</div>

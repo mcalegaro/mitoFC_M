@@ -6,9 +6,8 @@ class LigaInfoCtrl {
     constructor($scope) {
         $scope.viewModel(this);
         var self = this;
-        $scope.msg = {
-            cod: 'info',
-            desc: 'Carregando...'
+        self.$onInit = function () {
+            // console.info(self.liga);
         };
     }
 }

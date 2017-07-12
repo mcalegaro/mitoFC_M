@@ -2,10 +2,12 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 import templateUrl from './ligaDetails.html';
+import ligaInfo from '../ligaInfo/ligaInfo';
 import {
     HTTP
 } from 'meteor/http';
 import {
+    EP_ST_MERCADO,
     EP_LIGA,
     EP_PARCIAIS,
     EP_TIME,
@@ -37,6 +39,7 @@ class LigaDetailsCtrl {
             } else {
                 $scope.msg = '';
                 $scope.liga = response.data;
+                console.info($scope.liga);
                 $scope.orderProp = 'pontos.parcial';
                 $scope.getParciais();
                 $scope.doPopover = $scope.liga.liga.nome != '';
@@ -50,19 +53,36 @@ class LigaDetailsCtrl {
         });
 
         $scope.getParciais = function () {
-            console.info("Carregando parciais...");
-            HTTP.get(EP_PARCIAIS, {}, (error, response) => {
+            HTTP.get(EP_ST_MERCADO, {}, (error, response) => {
                 if (error) {
                     console.log(error);
                     $scope.$digest();
                 } else {
-                    $scope.pontuados = response.data;
-                    $scope.liga.times.forEach(function (time) {
-                        $scope.getParcialTime(time);
-                    }, this);
-                    console.info("Parciais carregadas.");
+                    $scope.statusMercado = response.data;
+                    $scope.$digest();
                 }
-            })
+            });
+            if ($scope.statusMercado != null && $scope.statusMercado.status_mercado == 2) {
+                console.info("Carregando parciais...");
+                HTTP.get(EP_PARCIAIS, {}, (error, response) => {
+                    if (error) {
+                        console.log(error);
+                        $scope.$digest();
+                    } else {
+                        $scope.pontuados = response.data;
+                        $scope.liga.times.forEach(function (time) {
+                            $scope.getParcialTime(time);
+                        }, this);
+                        console.info("Parciais carregadas.");
+                    }
+                })
+            } else {
+                $scope.orderProp = 'pontos.campeonato';
+                $scope.liga.times.forEach(function (time) {
+                    time.pontos.parcial = 0;
+                    time.pontos.atletas = 0;
+                }, this);
+            }
         };
 
         $scope.getParcialTime = function (time) {

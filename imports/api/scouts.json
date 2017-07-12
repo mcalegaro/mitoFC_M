@@ -1,0 +1,107 @@
+{
+   "RB": {
+       "descricao":"Roubada de bola",
+       "descricaoPl":"Roubadas de bola",
+       "obs":"",
+       "pts": 1.7
+    },
+   "FC": {
+       "descricao":"Falta cometida",
+       "descricaoPl":"Faltas cometidas",
+       "obs":"",
+       "pts": -0.5
+    },
+   "GC": {
+       "descricao":"Gol contra",
+       "descricaoPl":"Gols contra",
+       "obs":"",
+       "pts": -6
+    },
+   "CA": {
+       "descricao":"Cartão amarelo",
+       "obs":"",
+       "pts": -2
+    },
+   "CV": {
+       "descricao":"Cartão vermelho",
+       "obs":"",
+       "pts": -5
+    },
+   "SG": {
+       "descricao":"Jogo sem sofrer gol",
+       "obs":" - exclusivo para as posições de goleiro, zagueiro e lateral",
+       "pts": 5
+    },
+   "DD": {
+       "descricao":"Defesa difícil",
+       "descricaoPl":"Defesas difíceis",
+       "obs":" - exclusivo para a posição de goleiro",
+       "pts": 3
+    },
+   "DP": {
+       "descricao":"Defesa de pênalti",
+       "descricaoPl":"Defesas de pênalti",
+       "obs":" - exclusivo para a posição de goleiro",
+       "pts": 7
+    },
+   "GS": {
+       "descricao":"Gol sofrido",
+       "descricaoPl":"Gols sofridos",
+       "obs":" - exclusivo para a posição de goleiro",
+       "pts": -2
+    },
+   "FS": {
+       "descricao":"Falta sofrida",
+       "descricaoPl":"Faltas sofridas",
+       "obs":"",
+       "pts": 0.5
+    },
+   "PE": {
+       "descricao":"Passe errado",
+       "descricaoPl":"Passes errados",
+       "obs":"",
+       "pts": -0.3
+    },
+   "A": {
+       "descricao":"Assistência",
+       "descricaoPl":"Assistências",
+       "obs":"",
+       "pts": 5
+    },
+   "FT": {
+       "descricao":"Finalização na trave",
+       "descricaoPl":"Finalizações na trave",
+       "obs":"",
+       "pts": 3.5
+    },
+   "FD": {
+       "descricao":"Finalização defendida",
+       "descricaoPl":"Finalizações defendidas",
+       "obs":"",
+       "pts": 1
+    },
+   "FF": {
+       "descricao":"Finalização para fora",
+       "descricaoPl":"Finalizações para fora",
+       "obs":"",
+       "pts": 0.7
+    },
+   "G": {
+       "descricao":"Gol",
+       "descricaoPl":"Gols",
+       "obs":"",
+       "pts": 8
+    },
+   "I": {
+       "descricao":"Impedimento",
+       "descricaoPl":"Impedimentos",
+       "obs":"",
+       "pts": -0.5
+    },
+   "PP": {
+       "descricao":"Pênalti perdido",
+       "descricaoPl":"Pênaltis perdidos",
+       "obs":"",
+       "pts": -3.5
+    }
+}

@@ -3,7 +3,7 @@
 }
 
 div {
-    /*border-style: groove;*/
+    /* border-style: groove; */
 }
 
 .list-group-item div {
@@ -50,4 +50,14 @@ div {
     color: gray;
     font-size: 9px;
     font-style: inherit;
+    align-self: flex-end;
+    padding-left: 1vw;
+}
+
+.siglaClube {
+    align-self: center;
+    font-size: 18px;
+    font-weight: 900;
+    font-stretch: extra-condensed;
+    margin-right: 10px;
 }

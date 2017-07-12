@@ -2,9 +2,12 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 import templateUrl from './timeDetails.html';
+import scoutsJson from '/imports/api/scouts.json';
 import {
     EP_PARCIAIS,
-    EP_TIME
+    EP_TIME,
+    EP_ST_MERCADO,
+    TOKEN
 } from '/client/main.js';
 
 class TimeDetailsCtrl {
@@ -16,18 +19,41 @@ class TimeDetailsCtrl {
             desc: 'Carregando...'
         };
 
-        console.debug("Carregando parciais...");
-        HTTP.get(EP_PARCIAIS, {}, (error, response) => {
+        HTTP.get(EP_ST_MERCADO, {}, (error, response) => {
             if (error) {
-                console.error(error);
+                console.log(error);
                 $scope.$digest();
             } else {
-                $scope.pontuados = response.data;
-                console.info($scope.pontuados);
-                console.debug("Parciais carregadas.");
+                $scope.statusMercado = response.data;
+                if ($scope.statusMercado != null && $scope.statusMercado.status_mercado == 2) {
+                    $scope.getPontuados();
+                }
                 $scope.getParciais();
+                $scope.$digest();
             }
-        })
+        });
+
+        $scope.setFormatoFoto = function (url) {
+            return url.replace("_FORMATO", "_50x50");
+        }
+
+        $scope.getPontuados = function () {
+            console.debug("Carregando parciais...");
+            HTTP.get(EP_PARCIAIS, {}, (error, response) => {
+                if (error) {
+                    console.error(error);
+                    $scope.$digest();
+                } else {
+                    $scope.pontuados = response.data;
+                    // console.info($scope.pontuados);
+                    console.debug("Parciais carregadas.");
+                }
+            })
+        };
+        
+        $scope.showHideScouts = function(atleta_id) {
+            $('#divScouts_'+atleta_id).slideToggle('fast');
+        }
 
         $scope.getParciais = function () {
             HTTP.get(EP_TIME + $stateParams.slug, {}, (error, response) => {
@@ -37,17 +63,39 @@ class TimeDetailsCtrl {
                 } else {
                     $scope.time = response.data;
                     var time = $scope.time;
+                    console.info(time);
                     time.pontos = {};
                     time.pontos.parcial = 0;
                     time.pontos.atletas = 0;
-                    console.info(time);
+                    // console.info(time);
                     time.atletas.forEach(function (atleta) {
-                        atleta.parciais = $scope.pontuados.atletas[atleta.atleta_id];
+                        if ($scope.statusMercado != null && $scope.statusMercado.status_mercado == 2) {
+                            atleta.parciais = $scope.pontuados.atletas[atleta.atleta_id];
+                        } else {
+                            atleta.parciais = {};
+                            atleta.parciais.pontuacao = atleta.pontos_num;
+                            atleta.parciais.scout = atleta.scout;
+                        }
                         if (atleta.parciais != undefined) {
                             time.pontos.parcial += atleta.parciais.pontuacao;
                             time.pontos.atletas++;
+                            var scoutAux = atleta.parciais.scout;
+                            atleta.parciais.scoutInfo = JSON.stringify(scoutAux).replace(/\"|\{|\}/g, "").replace(/\,/g, ", ");
+                            atleta.parciais.scoutDesc = [];
+                            for (var scout in scoutAux) {
+                                var scoutDesc = scoutAux[scout] + " " + (scoutAux[scout] > 1 ? scoutsJson[scout].descricaoPl : scoutsJson[scout].descricao) + ": ";
+                                var pts = new Number(scoutsJson[scout].pts);
+                                var qtd = new Number(scoutAux[scout]);
+                                var scoutPts = qtd * pts;
+                                scoutDesc + scoutPts.toFixed(1);
+                                atleta.parciais.scoutDesc.push({
+                                    "descricao": scoutDesc,
+                                    "pts": scoutPts
+                                });
+                            };
                             $scope.$digest();
                         }
+
                     }, this);
                     $scope.msg = '';
                     $scope.$digest();
