@@ -27,8 +27,9 @@ class TimeDetailsCtrl {
                 $scope.statusMercado = response.data;
                 if ($scope.statusMercado != null && $scope.statusMercado.status_mercado == 2) {
                     $scope.getPontuados();
+                } else {
+                    $scope.getParciais();
                 }
-                $scope.getParciais();
                 $scope.$digest();
             }
         });
@@ -47,12 +48,14 @@ class TimeDetailsCtrl {
                     $scope.pontuados = response.data;
                     // console.info($scope.pontuados);
                     console.debug("Parciais carregadas.");
+                    $scope.getParciais();
+                    $scope.$digest();
                 }
             })
         };
-        
-        $scope.showHideScouts = function(atleta_id) {
-            $('#divScouts_'+atleta_id).slideToggle('fast');
+
+        $scope.showHideScouts = function (atleta_id) {
+            $('#divScouts_' + atleta_id).slideToggle();
         }
 
         $scope.getParciais = function () {

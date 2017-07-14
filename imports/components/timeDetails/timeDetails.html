@@ -26,7 +26,10 @@
         <div ng-repeat="atleta in time.atletas | orderBy:['posicao_id','apelido']">
             <div class="list-group-item" ng-click="showHideScouts(atleta.atleta_id);">
                 <div style="display: inline-flex; width: 100%;">
-                    <div class="siglaClube">{{time.clubes[atleta.clube_id].abreviacao}}</div>
+                    <!-- <div class="siglaClube">{{time.clubes[atleta.clube_id].abreviacao}}</div> -->
+                    <div class="siglaClube">
+                        <img src="/imgs/{{time.clubes[atleta.clube_id].abreviacao}}.png" height="30"/>
+                    </div>
                     <div>
                         <div class="ligaNome" style="white-space: nowrap;">{{atleta.apelido}}</div>
                         <div style="display: inline-flex">

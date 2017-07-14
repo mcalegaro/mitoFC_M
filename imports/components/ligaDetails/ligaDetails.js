@@ -59,30 +59,29 @@ class LigaDetailsCtrl {
                     $scope.$digest();
                 } else {
                     $scope.statusMercado = response.data;
-                    $scope.$digest();
+                    if ($scope.statusMercado != null && $scope.statusMercado.status_mercado == 2) {
+                        console.info("Carregando parciais...");
+                        HTTP.get(EP_PARCIAIS, {}, (error, response) => {
+                            if (error) {
+                                console.log(error);
+                                $scope.$digest();
+                            } else {
+                                $scope.pontuados = response.data;
+                                $scope.liga.times.forEach(function (time) {
+                                    $scope.getParcialTime(time);
+                                }, this);
+                                console.info("Parciais carregadas.");
+                            }
+                        })
+                    } else {
+                        $scope.orderProp = 'pontos.campeonato';
+                        $scope.liga.times.forEach(function (time) {
+                            time.pontos.parcial = 0;
+                            time.pontos.atletas = 0;
+                        }, this);
+                    }
                 }
             });
-            if ($scope.statusMercado != null && $scope.statusMercado.status_mercado == 2) {
-                console.info("Carregando parciais...");
-                HTTP.get(EP_PARCIAIS, {}, (error, response) => {
-                    if (error) {
-                        console.log(error);
-                        $scope.$digest();
-                    } else {
-                        $scope.pontuados = response.data;
-                        $scope.liga.times.forEach(function (time) {
-                            $scope.getParcialTime(time);
-                        }, this);
-                        console.info("Parciais carregadas.");
-                    }
-                })
-            } else {
-                $scope.orderProp = 'pontos.campeonato';
-                $scope.liga.times.forEach(function (time) {
-                    time.pontos.parcial = 0;
-                    time.pontos.atletas = 0;
-                }, this);
-            }
         };
 
         $scope.getParcialTime = function (time) {
