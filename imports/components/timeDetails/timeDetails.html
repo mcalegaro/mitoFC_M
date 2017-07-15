@@ -6,7 +6,7 @@
     <div ng-if="msg == ''">
         <div style="display: inline-flex; align-items: center; width: 100%; background-color: lightgray;" class="list-group-item">
             <img ng-src="{{time.time.url_escudo_png}}" height="35" />
-            <div style="white-space: nowrap;">
+            <div style="word-wrap: break-word; width: 100%;">
                 <p class="ligaNome">
                     {{time.time.nome}}
                 </p>
@@ -14,7 +14,7 @@
                     {{time.time.nome_cartola}}
                 </p>
             </div>
-            <div style="text-align: right; width: 100%;">
+            <div style="text-align: right;">
                 <p style="color: green;">
                     {{time.pontos.parcial | number:2}}
                 </p>

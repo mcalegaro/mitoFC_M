@@ -25,7 +25,7 @@ angular.module('mito-m', [
 });
 
 
-const PROXY = "http://localhost:3000/api?url=";
+const PROXY = window.location.origin+"/api?url=";
 const PFX_API = "https://api.cartolafc.globo.com";
 export const TOKEN = "15bca6b59813af4dac3f61992503dd92f694b6c6d3433414b736e6763785876663375717530596f7a787331517a4b76705364574f5a656c705374476b566d7361586f41373655494d61647353636b433061474235355455546239715f387764544771416438673d3d3a303a6d63616c656761726f2e32303135";
 export const EP_ST_MERCADO = PROXY + PFX_API + "/mercado/status";

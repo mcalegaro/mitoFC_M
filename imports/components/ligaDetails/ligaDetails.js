@@ -80,6 +80,7 @@ class LigaDetailsCtrl {
                             time.pontos.atletas = 0;
                         }, this);
                     }
+                    $scope.$digest();
                 }
             });
         };

@@ -6,7 +6,7 @@
             <span class="input-group-btn">
                     <button class="btn btn-default" type="submit">
                         <span class="glyphicon glyphicon-search"></span>
-                        <span class="badge">{{ligasSearchResult.length > 0 ? ligasSearchResult.length : ''}}</span>
+            <span class="badge">{{ligasSearchResult.length > 0 ? ligasSearchResult.length : ''}}</span>
             </button>
             </span>
             <input id="toRefresh" type="hidden" ng-click="$ctrl.refreshData()" />
@@ -14,13 +14,18 @@
     </form>
 </header>
 <div>
-    <div ng-if="msg">
-        <div ng-if="msg.cod=='info'" class="alert alert-info" role="alert">{{msg.desc}}</div>
-        <div ng-if="msg.cod=='erro'" class="alert alert-danger" role="alert">{{msg.desc}}</div>
-    </div>
-    <div ng-repeat="liga in ligasSearchResult" class="list-group">
-        <a class="list-group-item" ui-sref="ligaDetails({ slug: liga.slug })">
-            <liga-info liga="liga"></liga-info>
-        </a>
+    <div>
+        <div ng-if="msg">
+            <div ng-if="msg.cod=='info'" class="alert alert-info" role="alert">{{msg.desc}}</div>
+            <div ng-if="msg.cod=='erro'" class="alert alert-danger" role="alert">{{msg.desc}}</div>
+        </div>
+        <div ng-repeat="liga in ligasSearchResult" class="list-group">
+            <a class="list-group-item" ui-sref="ligaDetails({ slug: liga.slug })">
+                <liga-info liga="liga"></liga-info>
+                <!-- <div class="col4">
+                    <liga-tipo liga="liga"></liga-tipo>
+                </div> -->
+            </a>
+        </div>
     </div>
 </div>

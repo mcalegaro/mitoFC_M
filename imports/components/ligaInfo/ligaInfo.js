@@ -23,12 +23,4 @@ export default angular.module(name, [
             liga: '<'
         },
         controller: ['$scope', LigaInfoCtrl]
-    })
-    .directive('ligaTipo', function () {
-        return {
-            templateUrl: '/client/templates/ligaTipo.html',
-            bindings: {
-                liga: '<'
-            }
-        }
     });
