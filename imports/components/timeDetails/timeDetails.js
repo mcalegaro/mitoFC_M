@@ -66,7 +66,6 @@ class TimeDetailsCtrl {
                 } else {
                     $scope.time = response.data;
                     var time = $scope.time;
-                    console.info(time);
                     time.pontos = {};
                     time.pontos.parcial = 0;
                     time.pontos.atletas = 0;
