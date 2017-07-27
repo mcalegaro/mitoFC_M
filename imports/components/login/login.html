@@ -1,0 +1,15 @@
+<div>
+    <form role="form" data-ng-submit="login()">
+        <div class="input-group">
+            <span class="input-group-addon" style="width: 50px;">@</span>
+            <input type="text" placeholder="e-mail" id="username" name="username" data-ng-model="user.id" class="form-control" />
+        </div>
+        <div class="input-group">
+            <span class="input-group-addon" style="width: 50px;">*</span>
+            <input type="password" placeholder="senha" data-ng-model="user.pwd" class="form-control" />
+        </div>
+        <input type="submit" value="OK" class="btn btn-primary" />
+        <br/>
+        <mito-msg ng-if="msg" msg="msg"></mito-msg>
+    </form>
+</div>

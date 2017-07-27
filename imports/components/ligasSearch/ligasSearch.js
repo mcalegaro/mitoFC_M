@@ -83,7 +83,7 @@ export default angular.module(name, [
         function ($stateProvider) {
             'ngInject';
             $stateProvider
-                .state('ligasSearch', {
+                .state(name, {
                     url: '/ligasSearch',
                     template: '<ligas-search></ligas-search>'
                 });

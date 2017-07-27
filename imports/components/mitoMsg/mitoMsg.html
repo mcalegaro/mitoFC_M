@@ -1,0 +1,5 @@
+<div ng-if="$ctrl.msg" ng-init="msg=$ctrl.msg">
+    <div ng-if="msg.cod=='sucesso'" class="alert alert-success" role="alert">{{msg.desc}}</div>
+    <div ng-if="msg.cod=='info'" class="alert alert-info" role="alert">{{msg.desc}}</div>
+    <div ng-if="msg.cod=='erro'" class="alert alert-danger" role="alert">{{msg.desc}}</div>
+</div>

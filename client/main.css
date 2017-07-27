@@ -1,9 +1,13 @@
+body {
+    padding-top: 70px;
+}
+
 .ligaInfo {
     display: inline-flex;
 }
 
 div {
-     /* border-style: groove;  */
+    /* border-style: groove;  */
 }
 
 .list-group-item div {
