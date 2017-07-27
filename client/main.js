@@ -1,6 +1,8 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
+import templateUrl from './main.html';
 import mitoMsg from '../imports/components/mitoMsg/mitoMsg';
+import meuLogin from '../imports/components/meuLogin/meuLogin';
 import meuTime from '../imports/components/meuTime/meuTime';
 import minhasLigas from '../imports/components/minhasLigas/minhasLigas';
 import ligasList from '../imports/components/ligasList/ligasList';
@@ -12,26 +14,28 @@ import login from '../imports/components/login/login'
 import scouts from '/imports/api/scouts.json';
 import uiRouter from 'angular-ui-router';
 
-angular.module('mito-m', [
-  angularMeteor,
-  mitoMsg.name,
-  meuTime.name,
-  minhasLigas.name,
-  ligasList.name,
-  ligasSearch.name,
-  ligaInfo.name,
-  ligaDetails.name,
-  timeDetails.name,
-  login.name,
-  uiRouter
-]).config(function ($locationProvider, $urlRouterProvider) {
-  'ngInject';
+const name = 'mito-m';
+angular.module(name, [
+    angularMeteor,
+    mitoMsg.name,
+    meuLogin.name,
+    meuTime.name,
+    minhasLigas.name,
+    ligasList.name,
+    ligasSearch.name,
+    ligaInfo.name,
+    ligaDetails.name,
+    timeDetails.name,
+    login.name,
+    uiRouter
+  ])
+  .config(function ($locationProvider, $urlRouterProvider) {
+    'ngInject';
 
-  $locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true);
 
-  $urlRouterProvider.otherwise('/meuTime');
-});
-
+    $urlRouterProvider.otherwise('/meuTime');
+  });
 
 const PROXY = window.location.origin + "/api?url=";
 const PFX_API = "https://api.cartolafc.globo.com";

@@ -18,38 +18,42 @@ class LigaDetailsCtrl {
         'ngInject';
         $scope.viewModel(this);
         this.slug = $stateParams.slug;
-        var opts = {
-            headers: {
-                'X-GLB-Token': $.cookie("glbId")
-            }
-        };
-        this.setOrder = function (newOrder) {
-            $scope.orderProp = newOrder;
-        };
+        if ($.cookie("glbId")) {
+            var opts = {
+                headers: {
+                    'X-GLB-Token': $.cookie("glbId")
+                }
+            };
+            this.setOrder = function (newOrder) {
+                $scope.orderProp = newOrder;
+            };
 
-        HTTP.get(EP_LIGA + this.slug, opts, (error, response) => {
-            if (error) {
-                console.log(error);
-                $scope.msg = {
-                    cod: 'erro',
-                    desc: 'Serviço indisponível ;('
-                };
-                $scope.$digest();
-            } else {
-                $scope.msg = '';
-                $scope.liga = response.data;
-                console.info($scope.liga);
-                $scope.orderProp = 'pontos.parcial';
-                $scope.getParciais();
-                $scope.doPopover = $scope.liga.liga.nome != '';
-                if (!$scope.doPopover) {
+            HTTP.get(EP_LIGA + this.slug, opts, (error, response) => {
+                if (error) {
+                    console.log(error);
                     $scope.msg = {
-                        cod: 'info',
-                        desc: 'Sem resultados.'
+                        cod: 'erro',
+                        desc: 'Serviço indisponível ;('
+                    };
+                    $scope.$digest();
+                } else {
+                    $scope.msg = '';
+                    $scope.liga = response.data;
+                    console.info($scope.liga);
+                    $scope.orderProp = 'pontos.parcial';
+                    $scope.getParciais();
+                    $scope.doPopover = $scope.liga.liga.nome != '';
+                    if (!$scope.doPopover) {
+                        $scope.msg = {
+                            cod: 'info',
+                            desc: 'Sem resultados.'
+                        }
                     }
                 }
-            }
-        });
+            });
+        } else {
+            window.location.href = "/login";
+        }
 
         $scope.getParciais = function () {
             HTTP.get(EP_ST_MERCADO, {}, (error, response) => {
