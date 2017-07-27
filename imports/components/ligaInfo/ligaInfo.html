@@ -1,7 +1,8 @@
 <div class="ligaInfo" ng-init="liga=$ctrl.liga">
     <!--<div class="col1">+</div>-->
     <div class="col2">
-        <img src="{{liga.imagem}}" height="35" />
+        <img ng-if="!liga.mata_mata" src="{{liga.url_flamula_png}}" height="35" />
+        <img ng-if="liga.mata_mata" src="{{liga.url_trofeu_png}}" height="35" />
     </div>
     <div class="col3">
         <div class="ligaNome">

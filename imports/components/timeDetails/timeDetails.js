@@ -6,8 +6,7 @@ import scoutsJson from '/imports/api/scouts.json';
 import {
     EP_PARCIAIS,
     EP_TIME,
-    EP_ST_MERCADO,
-    TOKEN
+    EP_ST_MERCADO
 } from '/client/main.js';
 
 class TimeDetailsCtrl {

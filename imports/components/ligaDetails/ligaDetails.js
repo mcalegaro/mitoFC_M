@@ -10,8 +10,7 @@ import {
     EP_ST_MERCADO,
     EP_LIGA,
     EP_PARCIAIS,
-    EP_TIME,
-    TOKEN
+    EP_TIME
 } from '/client/main.js';
 
 class LigaDetailsCtrl {
@@ -21,7 +20,7 @@ class LigaDetailsCtrl {
         this.slug = $stateParams.slug;
         var opts = {
             headers: {
-                'X-GLB-Token': TOKEN
+                'X-GLB-Token': $.cookie("glbId")
             }
         };
         this.setOrder = function (newOrder) {

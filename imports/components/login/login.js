@@ -13,11 +13,18 @@ class LoginCtrl {
         'ngInject';
         $scope.viewModel(this);
         this.$onInit = function () {
-            // $.cookie("post_id", post_id, {expires: 365, path: '/'});
             // $.removeCookie("post_id", {path: '/'});
-            var cookieValue = $.cookie("glbId");
-            console.info(cookieValue);
+            gotoMeuTime();
         };
+
+        gotoMeuTime = () => {
+            var glbId = $.cookie("glbId");
+            console.info(glbId);
+            if (glbId) {
+                window.location.href = '/meuTime';
+            }
+        };
+
         $scope.user = {};
         $scope.msg = {};
         $scope.login = () => {
@@ -44,6 +51,11 @@ class LoginCtrl {
                     $scope.glbId = response.data.glbId;
                     $scope.msg.cod = 'sucesso';
                     $scope.msg.desc = "Sucesso.";
+                    $.cookie("glbId", $scope.glbId, {
+                        expires: 365,
+                        path: '/'
+                    });
+                    gotoMeuTime();
                     $scope.$digest();
                 }
             });
