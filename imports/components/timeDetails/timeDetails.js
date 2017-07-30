@@ -46,7 +46,7 @@ class TimeDetailsCtrl {
                     $scope.$digest();
                 } else {
                     $scope.pontuados = response.data;
-                    // console.info($scope.pontuados);
+                    console.info($scope.pontuados);
                     console.debug("Parciais carregadas.");
                     $scope.getParciais();
                     $scope.$digest();
@@ -76,15 +76,18 @@ class TimeDetailsCtrl {
                     // console.info(time);
                     time.atletas.forEach(function (atleta) {
                         if ($scope.statusMercado != null && $scope.statusMercado.status_mercado == 2) {
-                            atleta.parciais = $scope.pontuados.atletas[atleta.atleta_id];
+                            var parciais = $scope.pontuados.atletas[atleta.atleta_id];
+                            if (parciais != undefined && !(parciais.pontuacao == 0 && atleta.posicao_id == 6)) {
+                                atleta.parciais = parciais;
+                            }
                         } else {
                             atleta.parciais = {};
                             atleta.parciais.pontuacao = atleta.pontos_num;
                             atleta.parciais.scout = atleta.scout;
                         }
                         if (atleta.parciais != undefined) {
+                            console.info(atleta);
                             time.pontos.parcial += atleta.parciais.pontuacao;
-                            time.pontos.atletas++;
                             var scoutAux = atleta.parciais.scout;
                             atleta.parciais.scoutInfo = JSON.stringify(scoutAux).replace(/\"|\{|\}/g, "").replace(/\,/g, ", ");
                             atleta.parciais.scoutDesc = [];
@@ -99,6 +102,9 @@ class TimeDetailsCtrl {
                                     "pts": scoutPts
                                 });
                             };
+                            if (!(atleta.parciais.pontuacao == 0 && atleta.posicao_id == 6)) {
+                                time.pontos.atletas++;
+                            }
                             $scope.$digest();
                         }
 

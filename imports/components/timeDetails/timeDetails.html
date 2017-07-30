@@ -1,49 +1,51 @@
 <div ng-include="'/client/templates/message.html'"></div>
-<div id="timeDetails">
-    <div style="display: inline-flex; align-items: center; width: 100%; background-color: lightgray;" class="list-group-item">
-        <img ng-src="{{time.time.url_escudo_png}}" height="35" />
-        <div style="word-wrap: break-word; width: 100%;">
-            <p class="ligaNome">
-                {{time.time.nome}}
-            </p>
-            <p class="ligaDesc">
-                {{time.time.nome_cartola}}
-            </p>
-        </div>
-        <div style="text-align: right;">
-            <p style="color: green;">
-                {{time.pontos.parcial | number:2}}
-            </p>
-            <p ng-if="statusMercado.status_mercado == 2" style="color: gray;">
-                {{time.pontos.atletas}}/12
-            </p>
+<div id="timeDetails" class="list-group">
+    <div class="list-group-item">
+        <div class="inlineDiv">
+            <div class="escudo">
+                <img ng-src="{{time.time.url_escudo_png}}" height="35" />
+            </div>
+            <div class="fullW">
+                <div class="ligaNome">
+                    {{time.time.nome}}
+                </div>
+                <div class="ligaDesc">
+                    {{time.time.nome_cartola}}
+                </div>
+            </div>
+            <div class="right">
+                <div class="pontuacao" data-ng-style="time.pontos.parcial < 0 && {'color': 'red'}">
+                    {{time.pontos.parcial | number:2}}
+                </div>
+                <div ng-if="statusMercado.status_mercado == 2">
+                    {{time.pontos.atletas}}/12
+                </div>
+            </div>
         </div>
     </div>
-    <div ng-repeat="atleta in time.atletas | orderBy:['posicao_id','apelido']">
-        <div class="list-group-item" ng-click="showHideScouts(atleta.atleta_id);">
-            <div style="display: inline-flex; width: 100%;">
-                <!-- <div class="siglaClube">{{time.clubes[atleta.clube_id].abreviacao}}</div> -->
-                <div class="siglaClube">
-                    <img src="/imgs/{{atleta.clube_id}}.png" height="30" />
+</div>
+<div class="list-group">
+    <a ng-repeat="atleta in time.atletas | orderBy:['posicao_id','apelido']" class="list-group-item" ng-click="showHideScouts(atleta.atleta_id);">
+        <div class="inlineDiv">
+            <div class="escudo">
+                <img src="/imgs/{{atleta.clube_id}}.png" height="30" />
+            </div>
+            <div class="fullW">
+                <div class="ligaNome">{{atleta.apelido}}</div>
+                <div class="inlineDiv">
+                    <div class="clube">{{time.clubes[atleta.clube_id].nome}}</div>
+                    <div class="posicaoJogador">{{time.posicoes[atleta.posicao_id].nome}}</div>
                 </div>
-                <div>
-                    <div class="ligaNome" style="white-space: nowrap;">{{atleta.apelido}}</div>
-                    <div style="display: inline-flex">
-                        <div class="ligaDesc" style="white-space: nowrap;">{{time.clubes[atleta.clube_id].nome}}</div>
-                        <div class="posicaoJogador">{{time.posicoes[atleta.posicao_id].nome}}</div>
-                    </div>
-                </div>
-                <div class="posicaoJogador" style="width: 100%; text-align: right;">
+            </div>
+            <!-- <div class="posicaoJogador">
                     {{atleta.parciais.scoutInfo}}
-                </div>
-                <div ng-style="atleta.parciais.pontuacao < 0 && {'color': 'red'}" style="min-width: 42px; text-align: right; color: green; align-self: center;">{{atleta.parciais.pontuacao | number:2}}</div>
-            </div>
-            <div id="divScouts_{{atleta.atleta_id}}" style="display: none;">
-                <div class="ligaInfo" style="font-size: 10px; margin-left: 10px;" ng-repeat="scout in atleta.parciais.scoutDesc">
-                    <span>{{scout.descricao}}</span>
-                    <span style="color: green;" ng-style="scout.pts < 0 && {'color':'red'}">&nbsp;{{scout.pts | number:1}}</span>
-                </div>
+                </div> -->
+            <div class="pontuacao right" ng-style="atleta.parciais.pontuacao < 0 && {'color': 'red'}">{{atleta.parciais.pontuacao | number:2}}</div>
+        </div>
+        <div id="divScouts_{{atleta.atleta_id}}" style="display: none;">
+            <div ng-repeat="scout in atleta.parciais.scoutDesc" class="scoutInfo">
+                <span>{{scout.descricao}}</span><span class="pontuacao" data-ng-style="scout.pts < 0 && {'color':'red'}">&nbsp;{{scout.pts | number:1}}</span>
             </div>
         </div>
-    </div>
+    </a>
 </div>

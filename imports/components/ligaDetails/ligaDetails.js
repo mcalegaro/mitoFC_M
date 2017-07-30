@@ -70,6 +70,8 @@ class LigaDetailsCtrl {
                     $scope.$digest();
                 } else {
                     $scope.statusMercado = response.data;
+                    console.info('$scope.statusMercado');
+                    console.info($scope.statusMercado);
                     if ($scope.statusMercado != null && $scope.statusMercado.status_mercado == 2) {
                         console.info("Carregando parciais...");
                         HTTP.get(EP_PARCIAIS, {}, (error, response) => {
@@ -78,6 +80,7 @@ class LigaDetailsCtrl {
                                 $scope.$digest();
                             } else {
                                 $scope.pontuados = response.data;
+                                console.info($scope.liga.chaves_mata_mata);
                                 $scope.liga.times.forEach(function (time) {
                                     $scope.getParcialTime(time);
                                 }, this);
@@ -97,6 +100,7 @@ class LigaDetailsCtrl {
         };
 
         $scope.getParcialTime = function (time) {
+            if (!time.pontos) time.pontos = {};
             time.pontos.parcial = 0.0;
             time.pontos.atletas = 0;
             HTTP.get(EP_TIME + time.slug, {}, (error, response) => {
@@ -106,8 +110,11 @@ class LigaDetailsCtrl {
                 } else {
                     time.details = response.data;
                     time.details.atletas.forEach(function (atleta) {
-                        // console.info(atleta.atleta_id);
-                        atleta.parciais = $scope.pontuados.atletas[atleta.atleta_id];
+                        var parciais = $scope.pontuados.atletas[atleta.atleta_id];
+                        if (parciais != undefined && !(parciais.pontuacao == 0 && atleta.posicao_id == 6)) {
+                            atleta.parciais = parciais;
+                        }
+                        // atleta.parciais = $scope.pontuados.atletas[atleta.atleta_id];
                         if (atleta.parciais != undefined) {
                             time.pontos.campeonato += atleta.parciais.pontuacao;
                             time.pontos.mes += atleta.parciais.pontuacao;
@@ -119,6 +126,10 @@ class LigaDetailsCtrl {
                     $scope.$digest();
                 }
             })
+        };
+
+        $scope.getTimeById = function (id) {
+            return jsonPath($scope.times, "$..[?(@.time_id=='" + id + "')").toJSONString();
         };
 
     }

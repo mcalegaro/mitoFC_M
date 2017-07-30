@@ -1,62 +1,46 @@
 div {
-      /* border-style: groove;     */
+    /* border-style: groove; */
 }
 
 body {
     padding-top: 70px;
-}
-
-.mitoInfo {
-    border-radius: 4px 4px 4px 4px;
-    padding: 10px 10px 10px 10px;
-    white-space: nowrap;
-    text-align: center;
-}
-
-.container {
-    margin: auto;
-    display: table;
-    min-width: 320px;
-}
-
-.input-group {
-    width: 100%;
-}
-
-.ligaInfo {
-    display: inline-flex;
-}
-
-a.list-group-item {
-    display: inline-flex;
+    background-color: black;
+    min-width: 260px;
 }
 
 .list-group-item div {
     cursor: pointer;
 }
 
-.col1 {
-    width: 1vw;
+.roundedImage {
+    border-radius: 200px;
 }
 
-.col2 {
-    width: 10vw;
-    align-self: center;
+.fullW {
+    width: 100%;
 }
 
-.col3 {
-    width: 66vw;
-    align-self: center;
-}
-
-.col4 {
-    width: 8vw;
+.right {
     text-align: right;
-    align-self: center;
+    margin-left: 10px;
 }
 
-.col5 {
-    width: 39vw;
+.center {
+    text-align: center;
+}
+
+.classificacao {
+    min-width: 20px;
+}
+
+.imgComp {
+    white-space: nowrap;
+    min-width: 50px;
+}
+
+.inlineDiv {
+    display: inline-flex;
+    width: 100%;
 }
 
 .ligaNome {
@@ -71,18 +55,39 @@ a.list-group-item {
     text-align: justify;
 }
 
-.posicaoJogador {
-    color: gray;
-    font-size: 9px;
-    font-style: inherit;
-    align-self: flex-end;
-    padding-left: 1vw;
+img {
+    margin: 6px;
 }
 
-.siglaClube {
+.pontuacao {
+    color: darkgreen;
+    font-weight: bold;
+}
+
+div {
     align-self: center;
-    font-size: 18px;
-    font-weight: 900;
-    font-stretch: extra-condensed;
+}
+
+.escudo {
+    align-self: center;
+}
+
+.clube {
+    font-size: 10px;
     margin-right: 10px;
+    white-space: nowrap;
+    align-self: flex-end;
+}
+
+.posicaoJogador {
+    font-size: 9px;
+    color: gray;
+    align-self: flex-end;
+}
+
+.scoutInfo {
+    white-space: nowrap;
+    font-size: 9px;
+    margin-right: 6px;
+    display: inline-flex;
 }

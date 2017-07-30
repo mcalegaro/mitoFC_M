@@ -1,80 +1,144 @@
 <div ng-include="'/client/templates/message.html'"></div>
-<div id="ligaDetail" style="text-align: center;">
+<div id="ligaDetail">
     <div ng-if="liga.liga != null">
-        <div style="text-align: center">
-            <div id="divMenu" style="width: 100%; margin-bottom: 10px;">
-                <div id="divLiga" style="width: 70%; vertical-align: middle; display: inline-block; text-align: left;">
-                    <liga-info ng-init="liga.liga.imagem = liga.liga.url_flamula_png" liga="liga.liga"></liga-info>
-                </div>
-                <div style="width: 20%; vertical-align: middle; display: inline-block; text-align: right;">
-                    <div id="selectButton" class="dropdown">
-                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="true">
-                        <div ng-switch="orderProp" style="display: inline-block">
-                            <div class="glyphicon glyphicon-star" ng-switch-when="pontos.campeonato"></div>
-                            <div class="glyphicon glyphicon-step-backward" ng-switch-when="pontos.rodada"></div>
-                            <div class="glyphicon glyphicon-star-empty" ng-switch-when="pontos.parcial"></div>
-                            <div class="glyphicon glyphicon-calendar" ng-switch-when="pontos.mes"></div>
-                            <div class="glyphicon glyphicon-euro" ng-switch-when="patrimonio"></div>
+        <div id="divLigaPontosCorridos" data-ng-show="!liga.chaves_mata_mata">
+            <div id="divMenu" class="list-group">
+                <div id="divLiga" class="list-group-item inlineDiv">
+                    <liga-info class="fullW" ng-init="liga.liga.imagem = liga.liga.url_flamula_png" liga="liga.liga"></liga-info>
+                    <div>
+                        <div id="selectButton" class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="true">
+                                <div ng-switch="orderProp" style="display: inline-block">
+                                    <div class="glyphicon glyphicon-star" ng-switch-when="pontos.campeonato"></div>
+                                    <div class="glyphicon glyphicon-step-backward" ng-switch-when="pontos.rodada"></div>
+                                    <div class="glyphicon glyphicon-star-empty" ng-switch-when="pontos.parcial"></div>
+                                    <div class="glyphicon glyphicon-calendar" ng-switch-when="pontos.mes"></div>
+                                    <div class="glyphicon glyphicon-euro" ng-switch-when="patrimonio"></div>
+                                </div>
+                                <div class="caret"></div>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                                <li><a ng-click="$ctrl.setOrder('pontos.campeonato')"><span class="glyphicon glyphicon-star"></span> Campeonato</a></li>
+                                <li><a ng-click="$ctrl.setOrder('pontos.parcial')"><span class="glyphicon glyphicon-star-empty"></span> Parciais</a></li>
+                                <li><a ng-click="$ctrl.setOrder('pontos.rodada')"><span class="glyphicon glyphicon-step-backward"></span> Última Rodada</a></li>
+                                <li><a ng-click="$ctrl.setOrder('pontos.mes')"><span class="glyphicon glyphicon-calendar"></span> Mensal</a></li>
+                                <li><a ng-click="$ctrl.setOrder('patrimonio')"><span class="glyphicon glyphicon-euro"></span> Patrimônio</a></li>
+                            </ul>
                         </div>
-                        <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-                            <li><a class="glyphicon glyphicon-star" ng-click="$ctrl.setOrder('pontos.campeonato')"> Campeonato</a></li>
-                            <li><a class="glyphicon glyphicon-star-empty" ng-click="$ctrl.setOrder('pontos.parcial')"> Parciais</a></li>
-                            <li><a class="glyphicon glyphicon-step-backward" ng-click="$ctrl.setOrder('pontos.rodada')"> Última Rodada</a></li>
-                            <li><a class="glyphicon glyphicon-calendar" ng-click="$ctrl.setOrder('pontos.mes')"> Mensal</a></li>
-                            <li><a class="glyphicon glyphicon-euro" ng-click="$ctrl.setOrder('patrimonio')"> Patrimônio</a></li>
-                        </ul>
                     </div>
                 </div>
             </div>
-            <table align="center" style="width: 100%;">
-                <tr ng-repeat="time in liga.times | orderBy:[orderProp,'pontos.campeonato']:true" style="border-top-style: solid; border-top-color: gray; height: 52px;"
-                    ui-sref="timeDetails({ slug: time.slug })">
-                    <td style="width: 5%; font-size: 10px; color: gray;">{{$index+1}}<sup><u>o</u></sup></td>
-                    <td style="width: 10%;">
-                        <div ng-switch="orderProp" style="display: inline-block; vertical-align: middle">
-                            <div ng-switch-when="pontos.campeonato">
-                                <span ng-init="statusMercado.status_mercado == 1 ? diff = time.variacao.campeonato : diff = time.ranking.campeonato - $index - 1"
-                                    ng-up-down/>
+            <div class="list-group">
+                <a class="list-group-item inlineDiv" ui-sref="timeDetails({ slug: time.slug })" ng-repeat="time in liga.times | orderBy:[orderProp,'pontos.campeonato']:true">
+                    <div class="classificacao">
+                        <div>
+                            {{$index+1}}<sup><u>o</u></sup>
+                        </div>
+                        <div>
+                            <div ng-switch="orderProp">
+                                <div ng-switch-when="pontos.campeonato">
+                                    <div ng-init="statusMercado.status_mercado == 1 ? diff = time.variacao.campeonato : diff = time.ranking.campeonato - $index - 1"
+                                        ng-up-down>
+                                    </div>
+                                </div>
+                                <div ng-switch-when="patrimonio">
+                                    <div ng-init="diff = time.variacao.patrimonio" ng-up-down>
+                                    </div>
+                                </div>
+                                <div ng-switch-when="pontos.mes">
+                                    <div ng-init="statusMercado.status_mercado == 1 ? diff = time.variacao.mes : diff = time.ranking.mes - $index - 1" ng-up-down>
+                                    </div>
+                                </div>
                             </div>
-                            <div ng-switch-when="patrimonio">
-                                <span ng-init="diff = time.variacao.patrimonio" ng-up-down/>
+                        </div>
+                    </div>
+                    <div class="imgComp">
+                        <img height="35" ng-src="{{time.url_escudo_png}}" onerror="this.src='http://www.freeiconspng.com/uploads/flat-shield-icon-17.png'"
+                        />
+                        <img height="18" ng-src="{{time.foto_perfil}}" style="border-radius: 25px; position: relative; left: -30px; top: 10px;" onerror="this.src='http://www.freeiconspng.com/uploads/customers-icon-3.png'"
+                        />
+                    </div>
+                    <div class="fullW">
+                        <div><b>{{time.nome}}</b></div>
+                        <div>{{time.nome_cartola}}</div>
+                    </div>
+                    <div class="right">
+                        <div ng-switch="orderProp">
+                            <div ng-switch-when="pontos.campeonato">
+                                <div class="pontuacao" ng-style="time.pontos.campeonato < 0 && {'color':'red'}">
+                                    {{time.pontos.campeonato | number:2}}
+                                </div>
+                                <div ng-if="statusMercado.status_mercado == 2">{{time.pontos.atletas}}/12</div>
+                            </div>
+                            <div ng-switch-when="pontos.rodada">
+                                <div class="pontuacao" ng-style="time.pontos.rodada < 0 && {'color':'red'}">
+                                    {{time.pontos.rodada | number:2}}
+                                </div>
+                            </div>
+                            <div ng-switch-when="pontos.parcial">
+                                <div class="pontuacao" ng-style="time.pontos.parcial < 0 && {'color':'red'}">
+                                    {{time.pontos.parcial | number:2}}
+                                </div>
+                                <div>{{time.pontos.atletas}}/12</div>
                             </div>
                             <div ng-switch-when="pontos.mes">
-                                <span ng-init="statusMercado.status_mercado == 1 ? diff = time.variacao.mes : diff = time.ranking.mes - $index - 1" ng-up-down/>
+                                <div class="pontuacao" ng-style="time.pontos.mes < 0 && {'color':'red'}">
+                                    {{time.pontos.mes | number:2}}
+                                </div>
+                                <div ng-if="statusMercado.status_mercado == 2">{{time.pontos.atletas}}/12</div>
+                            </div>
+                            <div class="pontuacao" ng-switch-when="patrimonio">{{time.patrimonio | number:2}}
                             </div>
                         </div>
-                    </td>
-                    <td style="width: 10%;" nowrap><img ng-src="{{time.url_escudo_png}}" height="35" />
-                        <img ng-src="{{time.foto_perfil}}" onerror="this.src='http://www.freeiconspng.com/uploads/customers-icon-3.png'" height="18" style="border-radius: 25px; position: relative; left: -20px; top: 10px;" /></td>
-                    <td style="width: 25%; line-height: normal;" align="left">
-                        <b style="font-size: 12px;">
-                            <div style="word-wrap: break-word; width: inherit; margin: 0 0 0 0;">{{time.nome}}</div>
-                        </b>
-                        <p style="font-size: 10px; color: gray;">{{time.nome_cartola}}</p>
-                    </td>
-                    <td style="width: 20%; color:green" align="right">
-                        <div ng-switch="orderProp">
-                            <span ng-switch-when="pontos.campeonato" ng-style="time.pontos.campeonato < 0 && {'color':'red'}">{{time.pontos.campeonato | number:2}}
-                                <p ng-if="statusMercado.status_mercado == 2" style="color: gray">{{time.pontos.atletas}}/12</p>
-                            </span>
-                            <span ng-switch-when="pontos.rodada" ng-style="time.pontos.rodada < 0 && {'color':'red'}">{{time.pontos.rodada | number:2}}
-                            </span>
-                            <span ng-switch-when="pontos.parcial" ng-style="time.pontos.parcial < 0 && {'color':'red'}">
-                                {{time.pontos.parcial | number:2}}
-                                <p style="color: gray">{{time.pontos.atletas}}/12</p>
-                            </span>
-                            <span ng-switch-when="pontos.mes" ng-style="time.pontos.mes < 0 && {'color':'red'}">{{time.pontos.mes | number:2}}
-                                <p ng-if="statusMercado.status_mercado == 2" style="color: gray">{{time.pontos.atletas}}/12</p>
-                            </span>
-                            <span ng-switch-when="patrimonio">{{time.patrimonio | number:2}}
-                            </span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div id="divLigaMataMata" data-ng-show="liga.chaves_mata_mata" data-ng-init="ini=liga.liga.inicio_rodada">
+            <div data-ng-repeat="rodada in [ini+4, ini+3, ini+2, ini+1, ini]">
+                <data-ng-show data-ng-show="statusMercado.rodada_atual >= rodada">
+                    <div class="list-group-item">
+                        <!-- {{rodada}}<sup><u>a</u></sup> rodada - -->
+                        <h3>
+                            <data-ng-show data-ng-show="{{liga.chaves_mata_mata[rodada][0].tipo_fase=='P'}}">
+                                Primeira Fase
+                            </data-ng-show>
+                            <data-ng-show data-ng-show="{{liga.chaves_mata_mata[rodada][0].tipo_fase=='O'}}">
+                                Oitavas de Final
+                            </data-ng-show>
+                            <data-ng-show data-ng-show="{{liga.chaves_mata_mata[rodada][0].tipo_fase=='Q'}}">
+                                Quartas de Final
+                            </data-ng-show>
+                            <data-ng-show data-ng-show="{{liga.chaves_mata_mata[rodada][0].tipo_fase=='S'}}">
+                                Semi-finais
+                            </data-ng-show>
+                            <data-ng-show data-ng-show="{{liga.chaves_mata_mata[rodada][0].tipo_fase=='F'}}">
+                                Finais
+                            </data-ng-show>
+                        </h3>
+                    </div>
+                    <div data-ng-repeat="partida in liga.chaves_mata_mata[rodada]">
+                        <div class="list-group-item">
+                            <div id="flex" class="inlineDiv">
+                                <div id="mandante">
+                                    <!-- $..phoneNumbers[?(@.type=="iPhone")] -->
+                                    <!-- {{liga.times.forEach(function(time){console.info(time.nome)})}} -->
+                                    {{getTimeById(partida.time_mandante_id)}}
+                                    <!-- [*][?(time_id==partida.time_mandante_id)]}} -->
+                                    <!-- {{partida.time_mandante_id}} -->
+                                </div>
+                                <div>
+                                    X
+                                </div>
+                                <div id="visitante">
+                                    {{partida.time_visitante_id}}
+                                </div>
+                            </div>
                         </div>
-                    </td>
-                </tr>
-            </table>
+                    </div>
+                </data-ng-show>
+            </div>
         </div>
     </div>
 </div>

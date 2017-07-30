@@ -1,19 +1,19 @@
-<div class="ligaInfo" ng-init="liga=$ctrl.liga">
+<div class="inlineDiv" ng-init="liga=$ctrl.liga">
     <!--<div class="col1">+</div>-->
-    <div class="col2">
-        <img ng-if="!liga.mata_mata" src="{{liga.url_flamula_png}}" height="35" />
-        <img ng-if="liga.mata_mata" src="{{liga.url_trofeu_png}}" height="35" />
+    <div class="escudo">
+        <img ng-if="!liga.mata_mata" src="{{liga.url_flamula_png}}" height="35" onerror="this.src='http://www.freeiconspng.com/uploads/flat-shield-icon-17.png'"
+        />
+        <img ng-if="liga.mata_mata" src="{{liga.url_trofeu_png}}" height="35" onerror="this.src='http://www.freeiconspng.com/uploads/flat-shield-icon-17.png'"
+        />
     </div>
-    <div class="col3">
+    <div>
         <div class="ligaNome">
             <b>{{liga.nome}}</b>
         </div>
         <div class="ligaDesc">
-            <ng-show ng-show="{{liga.vencedor==undefined}}">
-                {{liga.descricao}}
-            </ng-show>
+            {{liga.descricao}}
             <ng-show ng-show="{{liga.vencedor}}">
-                Campeão: {{liga.vencedor.nome}}
+                <br/>Campeão: {{liga.vencedor.nome}}
             </ng-show>
         </div>
     </div>
