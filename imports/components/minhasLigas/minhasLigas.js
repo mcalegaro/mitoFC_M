@@ -8,40 +8,59 @@ import {
 import {
     EP_MINHASLIGAS
 } from '/client/main.js';
+import {
+    CARREGANDO, COD_ERRO
+} from '/client/lib/messages.js';
 
 class MinhasLigasCtrl {
     constructor($scope) {
         'ngInject';
         $scope.viewModel(this);
-        this.$onInit = () => {
-            $scope.msg = {
-                cod: 'info',
-                desc: 'Carregando'
-            };
-            $scope.glbId = $.cookie("glbId");
-            if (!$scope.glbId) {
-                window.location.href = "/login";
-            } else {
-                HTTP.get(EP_MINHASLIGAS, {
-                    headers: {
-                        'X-GLB-TOKEN': $scope.glbId
-                    }
-                }, (error, response) => {
-                    if (error) {
-                        console.error(error);
-                        $scope.msg = {
-                            cod: 'erro',
-                            desc: error
-                        }
-                    } else {
-                        console.info(response.data.ligas);
-                        $scope.ligasSearchResult = response.data.ligas;
-                        $scope.msg = {};
-                        $scope.$digest();
+
+        $scope.$watch("doPopover", function (value) {
+            if (value) {
+                console.debug('init popovers.');
+                $('[data-toggle="popover"]').popover();
+                $('div').on('click', function (e) {
+                    //did not click a popover toggle, or icon in popover toggle, or popover
+                    if ($(e.target).data('toggle') !== 'popover' &&
+                        $(e.target).parents('[data-toggle="popover"]').length === 0 &&
+                        $(e.target).parents('.popover.in').length === 0) {
+                        $('[data-toggle="popover"]').popover('hide');
                     }
                 });
             }
-        };
+        });
+
+        // this.$onInit = () => {
+        $scope.msg = CARREGANDO;
+        $scope.doPopover = false;
+        $scope.glbId = $.cookie("glbId");
+        if (!$scope.glbId) {
+            window.location.href = "/login";
+        } else {
+            HTTP.get(EP_MINHASLIGAS, {
+                headers: {
+                    'X-GLB-TOKEN': $scope.glbId
+                }
+            }, (error, response) => {
+                if (error) {
+                    console.error(error);
+                    $scope.msg = {
+                        cod: COD_ERRO,
+                        desc: error
+                    }
+                    $scope.$digest();
+                } else {
+                    console.info(response.data.ligas);
+                    $scope.ligas = response.data.ligas;
+                    $scope.msg = {};
+                    $scope.$digest();
+                    $scope.doPopover = response.data.ligas.length > 0;
+                }
+            });
+        }
+        // };
     }
 }
 

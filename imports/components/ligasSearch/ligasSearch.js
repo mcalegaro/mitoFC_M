@@ -88,7 +88,8 @@ export default angular.module(name, [
                     template: '<ligas-search></ligas-search>'
                 });
         }
-    ).directive('ligaTipo', function () {
+    )
+    .directive('ligaTipo', function () {
         return {
             templateUrl: '/client/templates/ligaTipo.html',
             bindings: {

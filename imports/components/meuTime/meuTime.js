@@ -8,16 +8,16 @@ import {
 import {
     EP_MEUTIME
 } from '/client/main.js';
+import {
+    CARREGANDO, COD_ERRO
+} from '/client/lib/messages.js';
 
 class MeuTimeCtrl {
     constructor($scope) {
         'ngInject';
         $scope.viewModel(this);
         this.$onInit = () => {
-            $scope.msg = {
-                cod: 'info',
-                desc: 'Carregando'
-            };
+            $scope.msg = CARREGANDO;
             $scope.glbId = $.cookie("glbId");
             if (!$scope.glbId) {
                 window.location.href = "/login";
@@ -30,7 +30,7 @@ class MeuTimeCtrl {
                     if (error) {
                         console.error(error);
                         $scope.msg = {
-                            cod: 'erro',
+                            cod: COD_ERRO,
                             desc: error
                         }
                     } else {

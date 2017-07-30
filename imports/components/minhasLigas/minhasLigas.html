@@ -1,14 +1,11 @@
-<div>
-    <div ng-if="msg">
-        <div ng-if="msg.cod=='info'" class="alert alert-info" role="alert">{{msg.desc}}</div>
-        <div ng-if="msg.cod=='erro'" class="alert alert-danger" role="alert">{{msg.desc}}</div>
+<div id="divLigas">
+    <div class="slide-animate-container">
+        <div class="slide-animate" ng-include="'/client/templates/message.html'"></div>
     </div>
-    <div ng-repeat="liga in ligasSearchResult" class="list-group">
-        <a class="list-group-item" ui-sref="ligaDetails({ slug: liga.slug })">
-            <liga-info liga="liga"></liga-info>
-            <!-- <div class="col4">
-                    <liga-tipo liga="liga"></liga-tipo>
-                </div> -->
-        </a>
-    </div>
+    <label for="ligasPart">Ligas</label>
+    <ligas id="ligasPart" ligas="ligas" filter="{time_dono_id: '', tipo_fase: '!F'}"></ligas>
+    <label for="ligasCart">Ligas do Cartola</label>
+    <ligas id="ligasCart" ligas="ligas" filter="{time_dono_id: '!'}"></ligas>
+    <label for="ligasPart">Torneios Finalizados</label>
+    <ligas id="ligasPart" ligas="ligas" filter="{time_dono_id: '', tipo_fase: 'F'}"></ligas>
 </div>

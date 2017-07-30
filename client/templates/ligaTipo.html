@@ -1,5 +1,5 @@
-<div class="tipoLiga" ng-init="liga=$ctrl.liga;" ng-click="$event.stopPropagation();">
-    <div ng-switch="{{liga.mata_mata}}">
+<div class="tipoLiga" ui-sref="#" ng-click="$event.stopPropagation();">
+    <div ng-switch="{{liga.mata_mata+''}}">
         <div ng-switch-when="true">
             <div>
                 <span class="glyphicon glyphicon-screenshot" data-container="body" data-toggle="popover" data-placement="left" data-content="Mata-mata">
@@ -16,13 +16,13 @@
                 </span>
             </div>
             <div>
-                <span ng-if="liga.tipo=='Aberta'" class="glyphicon glyphicon-log-in" data-container="body" data-toggle="popover" data-placement="left"
+                <span ng-if="liga.tipo=='A'" class="glyphicon glyphicon-log-in" data-container="body" data-toggle="popover" data-placement="left"
                     data-content="Liga Aberta">
                 </span>
-                <span ng-if="liga.tipo=='Moderada'" class="glyphicon glyphicon-envelope" data-container="body" data-toggle="popover" data-placement="left"
+                <span ng-if="liga.tipo=='M'" class="glyphicon glyphicon-envelope" data-container="body" data-toggle="popover" data-placement="left"
                     data-content="Liga Moderada">
                 </span>
-                <span ng-if="liga.tipo=='Fechada'" class="glyphicon glyphicon-lock" data-container="body" data-toggle="popover" data-placement="left"
+                <span ng-if="liga.tipo=='F'" class="glyphicon glyphicon-lock" data-container="body" data-toggle="popover" data-placement="left"
                     data-content="Liga Fechada">
                 </span>
             </div>

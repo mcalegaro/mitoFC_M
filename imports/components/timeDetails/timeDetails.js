@@ -8,15 +8,16 @@ import {
     EP_TIME,
     EP_ST_MERCADO
 } from '/client/main.js';
+import {
+    CARREGANDO,
+    COD_ERRO
+} from '/client/lib/messages.js';
 
 class TimeDetailsCtrl {
     constructor($scope, $stateParams) {
         'ngInject';
         $scope.viewModel(this);
-        $scope.msg = {
-            cod: 'info',
-            desc: 'Carregando...'
-        };
+        $scope.msg = CARREGANDO;
 
         HTTP.get(EP_ST_MERCADO, {}, (error, response) => {
             if (error) {
@@ -61,6 +62,10 @@ class TimeDetailsCtrl {
             HTTP.get(EP_TIME + $stateParams.slug, {}, (error, response) => {
                 if (error) {
                     console.error(error);
+                    $scope.msg = {
+                        cod: COD_ERRO,
+                        desc: error
+                    }
                     $scope.$digest();
                 } else {
                     $scope.time = response.data;

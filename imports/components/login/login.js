@@ -13,13 +13,11 @@ class LoginCtrl {
         'ngInject';
         $scope.viewModel(this);
         this.$onInit = function () {
-            // $.removeCookie("post_id", {path: '/'});
             gotoMeuTime();
         };
 
         gotoMeuTime = () => {
             var glbId = $.cookie("glbId");
-            console.info(glbId);
             if (glbId) {
                 window.location.href = '/meuTime';
             }
@@ -32,7 +30,7 @@ class LoginCtrl {
                 data: {
                     "payload": {
                         "email": $scope.user.id,
-                        "password": $scope.user.pwd,
+                        "password": $scope.user.password,
                         "serviceId": 438
                     }
                 }

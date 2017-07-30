@@ -13,11 +13,17 @@ import {
     EP_TIME
 } from '/client/main.js';
 
+import {
+    CARREGANDO,
+    COD_ERRO
+} from '/client/lib/messages.js';
+
 class LigaDetailsCtrl {
     constructor($scope, $stateParams) {
         'ngInject';
         $scope.viewModel(this);
         this.slug = $stateParams.slug;
+        $scope.msg = CARREGANDO;
         if ($.cookie("glbId")) {
             var opts = {
                 headers: {
@@ -32,22 +38,20 @@ class LigaDetailsCtrl {
                 if (error) {
                     console.log(error);
                     $scope.msg = {
-                        cod: 'erro',
-                        desc: 'Serviço indisponível ;('
+                        cod: COD_ERRO,
+                        desc: error
                     };
                     $scope.$digest();
                 } else {
-                    $scope.msg = '';
+                    $scope.msg = {};
                     $scope.liga = response.data;
                     console.info($scope.liga);
                     $scope.orderProp = 'pontos.parcial';
                     $scope.getParciais();
                     $scope.doPopover = $scope.liga.liga.nome != '';
                     if (!$scope.doPopover) {
-                        $scope.msg = {
-                            cod: 'info',
-                            desc: 'Sem resultados.'
-                        }
+                        $scope.msg = CARREGANDO;
+                        $scope.msg.desc = 'Sem resultados.';
                     }
                 }
             });
@@ -59,6 +63,10 @@ class LigaDetailsCtrl {
             HTTP.get(EP_ST_MERCADO, {}, (error, response) => {
                 if (error) {
                     console.log(error);
+                    $scope.msg = {
+                        cod: COD_ERRO,
+                        desc: error
+                    };
                     $scope.$digest();
                 } else {
                     $scope.statusMercado = response.data;

@@ -1,0 +1,10 @@
+<div id="divLigas">
+    <div ng-repeat="liga in $ctrl.ligas | filter:$ctrl.filter | orderBy:['nome']" class="list-group">
+        <a class="list-group-item" ui-sref="ligaDetails({ slug: liga.slug })">
+            <liga-info liga="liga"></liga-info>
+            <div class="col4">
+                <liga-tipo liga="liga"></liga-tipo>
+            </div>
+        </a>
+    </div>
+</div>

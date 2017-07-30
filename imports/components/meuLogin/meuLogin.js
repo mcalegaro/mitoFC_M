@@ -7,34 +7,34 @@ import {
 import {
     EP_MEUTIME
 } from '/client/main.js';
+import {
+    CARREGANDO, COD_ERRO
+} from '/client/lib/messages.js';
 
 class MeuLoginCtrl {
     constructor($scope) {
         'ngInject';
         $scope.viewModel(this);
         $scope.user = {};
-        $scope.msg = {};
+        $scope.msg = CARREGANDO;
         this.$onInit = function () {
 
-            $scope.glbId = $.cookie("glbId");
-
-            if ($scope.glbId) {
+            if ($.cookie("glbId")) {
                 HTTP.get(EP_MEUTIME, {
                     headers: {
-                        'X-GLB-TOKEN': $scope.glbId
+                        'X-GLB-TOKEN': $.cookie("glbId")
                     }
                 }, (error, response) => {
                     if (error) {
                         console.error(error);
                         $scope.msg = {
-                            cod: 'erro',
+                            cod: COD_ERRO,
                             desc: error
                         }
                     } else {
-                        console.info(response.data.time);
-                        $scope.usr = {
-                            nome: response.data.time.nome_cartola
-                        }
+                        console.info(response.data);
+                        $scope.time = response.data.time;
+                        $scope.msg = {};
                         $scope.$digest();
                     }
                 });

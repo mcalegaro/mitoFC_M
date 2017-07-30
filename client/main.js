@@ -5,6 +5,7 @@ import mitoMsg from '../imports/components/mitoMsg/mitoMsg';
 import meuLogin from '../imports/components/meuLogin/meuLogin';
 import meuTime from '../imports/components/meuTime/meuTime';
 import minhasLigas from '../imports/components/minhasLigas/minhasLigas';
+import ligas from '../imports/components/ligas/ligas';
 import ligasList from '../imports/components/ligasList/ligasList';
 import ligasSearch from '../imports/components/ligasSearch/ligasSearch';
 import ligaInfo from '../imports/components/ligaInfo/ligaInfo';
@@ -21,6 +22,7 @@ angular.module(name, [
     meuLogin.name,
     meuTime.name,
     minhasLigas.name,
+    ligas.name,
     ligasList.name,
     ligasSearch.name,
     ligaInfo.name,

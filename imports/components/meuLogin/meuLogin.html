@@ -1,6 +1,19 @@
-<div>
-    <mito-msg msg="msg"></mito-msg>
-    {{usr.nome}}
-    <button class="btn btn-default" ng-click="logout()">Logout</button>
+<div ng-include="'/client/templates/message.html'"></div>
+<div id="info" ng-cloak>
+    <h2 class="bg-primary mitoInfo" id="nomeCartoleiro">
+        <img ng-src="{{time.foto_perfil}}" height="50" style="border-radius: 25px;" /> {{time.nome_cartola}}
+    </h2>
+    <h3 class="bg-success mitoInfo">
+        <div>
+            <img ng-src="{{time.url_camisa_png}}" width="100vw" />
+            <img ng-src="{{time.url_escudo_png}}" width="50vw" />
+        </div>
+        <div>
+            <strong>{{time.nome}}</strong> - Desde {{time.temporada_inicial}}
+        </div>
+    </h3>
+    <div>
+        <button class="btn btn-default btn-lg btn-block" ng-click="logout()">Sair</button>
+    </div>
     <!-- <login></login> -->
 </div>

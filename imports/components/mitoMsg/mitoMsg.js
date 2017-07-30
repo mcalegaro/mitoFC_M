@@ -4,9 +4,15 @@ import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 
 class MitoMsgCtrl {
-    constructor($scope) {
+    constructor($scope, $rootScope) {
         'ngInject';
         $scope.viewModel(this);
+        // $scope.$onInit = function(){
+        //     $scope.msg = this.msg;
+        // }
+        $scope.$watch('$parent.msg', function (newVal) {
+            this.msg = newVal;
+        });
     }
 }
 

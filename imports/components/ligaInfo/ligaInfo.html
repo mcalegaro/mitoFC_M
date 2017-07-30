@@ -9,7 +9,12 @@
             <b>{{liga.nome}}</b>
         </div>
         <div class="ligaDesc">
-            {{liga.descricao}}
+            <ng-show ng-show="{{liga.vencedor==undefined}}">
+                {{liga.descricao}}
+            </ng-show>
+            <ng-show ng-show="{{liga.vencedor}}">
+                Campeão: {{liga.vencedor.nome}}
+            </ng-show>
         </div>
     </div>
 </div>
