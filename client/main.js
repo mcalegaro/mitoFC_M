@@ -11,7 +11,8 @@ import ligasSearch from '../imports/components/ligasSearch/ligasSearch';
 import ligaInfo from '../imports/components/ligaInfo/ligaInfo';
 import ligaDetails from '../imports/components/ligaDetails/ligaDetails';
 import timeDetails from '../imports/components/timeDetails/timeDetails';
-import login from '../imports/components/login/login'
+import timeInfo from '../imports/components/timeInfo/timeInfo';
+import login from '../imports/components/login/login';
 import scouts from '/imports/api/scouts.json';
 import uiRouter from 'angular-ui-router';
 
@@ -28,6 +29,7 @@ angular.module(name, [
     ligaInfo.name,
     ligaDetails.name,
     timeDetails.name,
+    timeInfo.name,
     login.name,
     uiRouter
   ])

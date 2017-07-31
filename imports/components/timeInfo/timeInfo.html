@@ -1,0 +1,23 @@
+<div class="inlineDiv">
+    <div class="escudo">
+        <img ng-src="{{time.url_escudo_png}}" height="35" />
+    </div>
+    <div class="fullW">
+        <div class="ligaNome">
+            {{time.nome}}
+        </div>
+        <div class="ligaDesc">
+            {{time.nome_cartola}}
+        </div>
+    </div>
+    <div class="right">
+        <div id="pontos" class="pontuacao" data-ng-init="pontos=getPontos()">
+            <div data-ng-style="pontos < 0 && {'color': 'red'}">
+                {{pontos | number:2}}
+            </div>
+        </div>
+        <div data-ng-init="atletas=getAtletas()" data-ng-if="atletas">
+            {{getAtletas()}}/12
+        </div>
+    </div>
+</div>

@@ -19,120 +19,133 @@ import {
 } from '/client/lib/messages.js';
 
 class LigaDetailsCtrl {
+
     constructor($scope, $stateParams) {
         'ngInject';
         $scope.viewModel(this);
-        this.slug = $stateParams.slug;
-        $scope.msg = CARREGANDO;
-        if ($.cookie("glbId")) {
-            var opts = {
-                headers: {
-                    'X-GLB-Token': $.cookie("glbId")
-                }
-            };
-            this.setOrder = function (newOrder) {
-                $scope.orderProp = newOrder;
-            };
+        var vm = this;
+        vm.slug = $stateParams.slug;
 
-            HTTP.get(EP_LIGA + this.slug, opts, (error, response) => {
-                if (error) {
-                    console.log(error);
-                    $scope.msg = {
-                        cod: COD_ERRO,
-                        desc: error
-                    };
-                    $scope.$digest();
-                } else {
-                    $scope.msg = {};
-                    $scope.liga = response.data;
-                    console.info($scope.liga);
-                    $scope.orderProp = 'pontos.parcial';
-                    $scope.getParciais();
-                    $scope.doPopover = $scope.liga.liga.nome != '';
-                    if (!$scope.doPopover) {
-                        $scope.msg = CARREGANDO;
-                        $scope.msg.desc = 'Sem resultados.';
-                    }
-                }
-            });
+        vm.msg = CARREGANDO;
+        if ($.cookie("glbId")) {
+            vm.loadPage(vm, $scope);
         } else {
             window.location.href = "/login";
         }
-
-        $scope.getParciais = function () {
-            HTTP.get(EP_ST_MERCADO, {}, (error, response) => {
-                if (error) {
-                    console.log(error);
-                    $scope.msg = {
-                        cod: COD_ERRO,
-                        desc: error
-                    };
-                    $scope.$digest();
-                } else {
-                    $scope.statusMercado = response.data;
-                    console.info('$scope.statusMercado');
-                    console.info($scope.statusMercado);
-                    if ($scope.statusMercado != null && $scope.statusMercado.status_mercado == 2) {
-                        console.info("Carregando parciais...");
-                        HTTP.get(EP_PARCIAIS, {}, (error, response) => {
-                            if (error) {
-                                console.log(error);
-                                $scope.$digest();
-                            } else {
-                                $scope.pontuados = response.data;
-                                console.info($scope.liga.chaves_mata_mata);
-                                $scope.liga.times.forEach(function (time) {
-                                    $scope.getParcialTime(time);
-                                }, this);
-                                console.info("Parciais carregadas.");
-                            }
-                        })
-                    } else {
-                        $scope.orderProp = 'pontos.campeonato';
-                        $scope.liga.times.forEach(function (time) {
-                            time.pontos.parcial = 0;
-                            time.pontos.atletas = 0;
-                        }, this);
-                    }
-                    $scope.$digest();
-                }
-            });
-        };
-
-        $scope.getParcialTime = function (time) {
-            if (!time.pontos) time.pontos = {};
-            time.pontos.parcial = 0.0;
-            time.pontos.atletas = 0;
-            HTTP.get(EP_TIME + time.slug, {}, (error, response) => {
-                if (error) {
-                    console.log(error);
-                    $scope.$digest();
-                } else {
-                    time.details = response.data;
-                    time.details.atletas.forEach(function (atleta) {
-                        var parciais = $scope.pontuados.atletas[atleta.atleta_id];
-                        if (parciais != undefined && !(parciais.pontuacao == 0 && atleta.posicao_id == 6)) {
-                            atleta.parciais = parciais;
-                        }
-                        // atleta.parciais = $scope.pontuados.atletas[atleta.atleta_id];
-                        if (atleta.parciais != undefined) {
-                            time.pontos.campeonato += atleta.parciais.pontuacao;
-                            time.pontos.mes += atleta.parciais.pontuacao;
-                            time.pontos.parcial += atleta.parciais.pontuacao;
-                            time.pontos.atletas++;
-                            $scope.$digest();
-                        }
-                    }, this);
-                    $scope.$digest();
-                }
-            })
-        };
-
-        $scope.getTimeById = function (id) {
-            return jsonPath($scope.times, "$..[?(@.time_id=='" + id + "')").toJSONString();
-        };
-
     }
+
+    getParciais(vm, scope) {
+        HTTP.get(EP_ST_MERCADO, {}, (error, response) => {
+            if (error) {
+                console.log(error);
+                vm.msg = {
+                    cod: COD_ERRO,
+                    desc: error
+                };
+                scope.$digest();
+            } else {
+                vm.statusMercado = response.data;
+                if (vm.statusMercado != null && vm.statusMercado.status_mercado == 2) {
+                    console.info("Carregando parciais...");
+                    HTTP.get(EP_PARCIAIS, {}, (error, response) => {
+                        if (error) {
+                            console.log(error);
+                            scope.$digest();
+                        } else {
+                            vm.pontuados = response.data;
+                            vm.liga.times.forEach(function (time) {
+                                vm.getParcialTime(vm, scope, time);
+                            }, vm);
+                            console.info("Parciais carregadas.");
+                        }
+                    })
+                } else {
+                    vm.orderProp = 'pontos.campeonato';
+                    vm.liga.times.forEach(function (time) {
+                        time.pontos.parcial = 0;
+                        time.pontos.atletas = 0;
+                    }, vm);
+                }
+                scope.$digest();
+            }
+        });
+    }
+
+    getParcialTime(vm, scope, time) {
+        if (!time.pontos) time.pontos = {};
+        time.pontos.parcial = 0.0;
+        time.pontos.atletas = 0;
+        HTTP.get(EP_TIME + time.slug, {}, (error, response) => {
+            if (error) {
+                console.log(error);
+                scope.$digest();
+            } else {
+                time.details = response.data;
+                time.details.atletas.forEach(function (atleta) {
+                    var parciais = vm.pontuados.atletas[atleta.atleta_id];
+                    if (parciais != undefined && !(parciais.pontuacao == 0 && atleta.posicao_id == 6)) {
+                        atleta.parciais = parciais;
+                    }
+                    // atleta.parciais = vm.pontuados.atletas[atleta.atleta_id];
+                    if (atleta.parciais != undefined) {
+                        time.pontos.campeonato += atleta.parciais.pontuacao;
+                        time.pontos.mes += atleta.parciais.pontuacao;
+                        time.pontos.parcial += atleta.parciais.pontuacao;
+                        time.pontos.atletas++;
+                        scope.$digest();
+                    }
+                }, vm);
+                scope.$digest();
+            }
+        })
+    }
+
+    getTimeById(id) {
+        var timeR = null;
+        this.liga.times.forEach(function (time) {
+            if (time.time_id == id) {
+                timeR = time;
+                return;
+            }
+        }, this);
+        return timeR;
+    };
+
+    setOrder(newOrder) {
+        this.orderProp = newOrder;
+    };
+
+    loadPage(vm, scope) {
+        var opts = {
+            headers: {
+                'X-GLB-Token': $.cookie("glbId")
+            }
+        };
+
+        HTTP.get(EP_LIGA + vm.slug, opts, (error, response) => {
+            if (error) {
+                console.log(error);
+                vm.msg = {
+                    cod: COD_ERRO,
+                    desc: error
+                };
+                scope.$digest();
+            } else {
+                vm.msg = {};
+                vm.liga = response.data;
+                console.info(response.data);
+                vm.orderProp = 'pontos.parcial';
+                vm.getParciais(vm, scope);
+                vm.doPopover = vm.liga.liga.nome != '';
+                if (!vm.doPopover) {
+                    vm.msg = CARREGANDO;
+                    vm.msg.desc = 'Sem resultados.';
+                }
+                scope.$digest();
+            }
+        });
+    };
+
 }
 
 const name = 'ligaDetails';
@@ -142,7 +155,8 @@ export default angular.module(name, [
     uiRouter
 ]).component(name, {
     templateUrl,
-    controller: LigaDetailsCtrl
+    controller: LigaDetailsCtrl,
+    controllerAs: 'vm'
 }).config(function ($stateProvider) {
     'ngInject';
     $stateProvider.state('ligaDetails', {

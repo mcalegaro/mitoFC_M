@@ -1,5 +1,5 @@
-<div ng-if="msg">
-    <div ng-if="msg.cod=='sucesso'" class="alert alert-success" role="alert">{{msg.desc}}</div>
-    <div ng-if="msg.cod=='info'" class="alert alert-info" role="alert">{{msg.desc}}</div>
-    <div ng-if="msg.cod=='erro'" class="alert alert-danger" role="alert">{{msg.desc}}</div>
+<div ng-if="vm.msg">
+    <div ng-if="vm.msg.cod=='sucesso'" class="alert alert-success" role="alert">{{vm.msg.desc}}</div>
+    <div ng-if="vm.msg.cod=='info'" class="alert alert-info" role="alert">{{vm.msg.desc}}</div>
+    <div ng-if="vm.msg.cod=='erro'" class="alert alert-danger" role="alert">{{vm.msg.desc}}</div>
 </div>

@@ -46,7 +46,6 @@ class TimeDetailsCtrl {
                     $scope.$digest();
                 } else {
                     $scope.pontuados = response.data;
-                    console.info($scope.pontuados);
                     console.debug("Parciais carregadas.");
                     $scope.getParciais();
                     $scope.$digest();
@@ -73,7 +72,6 @@ class TimeDetailsCtrl {
                     time.pontos = {};
                     time.pontos.parcial = 0;
                     time.pontos.atletas = 0;
-                    // console.info(time);
                     time.atletas.forEach(function (atleta) {
                         if ($scope.statusMercado != null && $scope.statusMercado.status_mercado == 2) {
                             var parciais = $scope.pontuados.atletas[atleta.atleta_id];
@@ -86,7 +84,6 @@ class TimeDetailsCtrl {
                             atleta.parciais.scout = atleta.scout;
                         }
                         if (atleta.parciais != undefined) {
-                            console.info(atleta);
                             time.pontos.parcial += atleta.parciais.pontuacao;
                             var scoutAux = atleta.parciais.scout;
                             atleta.parciais.scoutInfo = JSON.stringify(scoutAux).replace(/\"|\{|\}/g, "").replace(/\,/g, ", ");
