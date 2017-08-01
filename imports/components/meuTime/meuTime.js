@@ -9,44 +9,47 @@ import {
     EP_MEUTIME
 } from '/client/main.js';
 import {
-    CARREGANDO, COD_ERRO
+    CARREGANDO,
+    COD_ERRO
 } from '/client/lib/messages.js';
 
 class MeuTimeCtrl {
     constructor($scope) {
         'ngInject';
         $scope.viewModel(this);
-        this.$onInit = () => {
-            $scope.msg = CARREGANDO;
-            $scope.glbId = $.cookie("glbId");
-            if (!$scope.glbId) {
-                window.location.href = "/login";
-            } else {
-                HTTP.get(EP_MEUTIME, {
-                    headers: {
-                        'X-GLB-TOKEN': $scope.glbId
+
+        var vm = this;
+        vm.msg = CARREGANDO;
+        if (!$.cookie("glbId")) {
+            window.location.href = "/login";
+        } else {
+            HTTP.get(EP_MEUTIME, {
+                headers: {
+                    'X-GLB-TOKEN': $.cookie("glbId")
+                }
+            }, (error, response) => {
+                if (error) {
+                    console.error(error);
+                    vm.msg = {
+                        cod: COD_ERRO,
+                        desc: JSON.parse(response.content).mensagem
                     }
-                }, (error, response) => {
-                    if (error) {
-                        console.error(error);
-                        $scope.msg = {
-                            cod: COD_ERRO,
-                            desc: error
-                        }
-                    } else {
-                        console.info(response.data);
-                        window.location.href = "/time/"+response.data.time.slug;
-                    }
-                });
-            }
-        };
+                    $scope.$digest();
+                } else {
+                    console.info(response.data);
+                    window.location.href = "/time/" + response.data.time.slug;
+                }
+            });
+        }
+
     }
 }
 
 const name = 'meuTime';
 export default angular.module(name, [angularMeteor, uiRouter]).component(name, {
     templateUrl,
-    controller: MeuTimeCtrl
+    controller: MeuTimeCtrl,
+    controllerAs: 'vm'
 }).config(function ($stateProvider) {
     'ngInject';
     $stateProvider.state(

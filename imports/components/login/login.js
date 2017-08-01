@@ -19,7 +19,7 @@ class LoginCtrl {
         gotoMeuTime = () => {
             var glbId = $.cookie("glbId");
             if (glbId) {
-                window.location.href = '/meuTime';
+                window.location.href = '/meuLogin';
             }
         };
 

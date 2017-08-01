@@ -1,5 +1,5 @@
 <div id="divLigaPontosCorridos">
-    <div id="divMenu" class="list-group">
+    <div id="divMenu" class="list-group fixedTop">
         <div id="divLiga" class="list-group-item inlineDiv">
             <liga-info class="fullW" ng-init="vm.liga.liga.imagem = vm.liga.liga.url_flamula_png" liga="vm.liga.liga"></liga-info>
             <div>
@@ -26,7 +26,7 @@
             </div>
         </div>
     </div>
-    <div class="list-group">
+    <div class="list-group container">
         <a class="list-group-item inlineDiv" ui-sref="timeDetails({ slug: time.slug })" ng-repeat="time in vm.liga.times | orderBy:[vm.orderProp,'pontos.campeonato']:true">
             <div class="classificacao">
                 <div>

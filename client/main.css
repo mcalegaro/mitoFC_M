@@ -2,9 +2,12 @@ div {
     /* border-style: groove; */
 }
 
-body {
+body{
+    background-color: ghostwhite;
+}
+
+.container-main {
     padding-top: 70px;
-    background-color: black;
     min-width: 260px;
 }
 
@@ -94,4 +97,13 @@ div {
 
 .versus {
     margin: 10px;
+}
+
+.fixedTop {
+    position: fixed;
+    top: 0;
+}
+
+.input-group {
+    width: 100%;
 }

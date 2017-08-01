@@ -1,6 +1,6 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import templateUrl from './main.html';
+import mitoMenu from '../imports/components/mitoMenu/mitoMenu';
 import mitoMsg from '../imports/components/mitoMsg/mitoMsg';
 import meuLogin from '../imports/components/meuLogin/meuLogin';
 import meuTime from '../imports/components/meuTime/meuTime';
@@ -19,6 +19,7 @@ import uiRouter from 'angular-ui-router';
 const name = 'mito-m';
 angular.module(name, [
     angularMeteor,
+    mitoMenu.name,
     mitoMsg.name,
     meuLogin.name,
     meuTime.name,
