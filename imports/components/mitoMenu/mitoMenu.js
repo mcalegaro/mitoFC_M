@@ -6,7 +6,8 @@ import {
     COD_ERRO
 } from '/client/lib/messages.js';
 import {
-    EP_ST_MERCADO
+    EP_ST_MERCADO,
+    EP_MEUTIME
 } from '/client/main.js';
 
 class MitoMenuCtrl {
@@ -15,6 +16,7 @@ class MitoMenuCtrl {
         this.$onInit = function () {
             if ($.cookie("glbId") != undefined) {
                 this.getStatusMercado(this);
+                this.getUserInfo(this, $scope);
             }
         };
     }
@@ -24,15 +26,26 @@ class MitoMenuCtrl {
         HTTP.get(EP_ST_MERCADO, {}, (error, response) => {
             if (error) {
                 console.log(error);
-                vm.msg = {
-                    cod: COD_ERRO,
-                    desc: error
-                };
-                scope.$digest();
             } else {
                 vm.statusMercado = response.data;
             }
         })
+    }
+
+    getUserInfo(vm, scope) {
+        HTTP.get(EP_MEUTIME, {
+            headers: {
+                'X-GLB-TOKEN': $.cookie("glbId")
+            }
+        }, function (error, response) {
+            if (!error) {
+                vm.logged = true;
+            } else {
+                console.error(error);
+            }
+            scope.$digest();
+        });
+
     }
 }
 

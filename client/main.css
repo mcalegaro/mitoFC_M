@@ -99,9 +99,11 @@ div {
     margin: 10px;
 }
 
-.fixedTop {
+.fixedTopRight {
     position: fixed;
-    top: 0;
+    z-index: 1;
+    top: 54px;
+    right: 14px;
 }
 
 .input-group {

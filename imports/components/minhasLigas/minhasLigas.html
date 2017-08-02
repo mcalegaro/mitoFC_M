@@ -1,8 +1,8 @@
-<div ng-include="'/client/templates/message.html'"></div>
-<div id="divLigas">
-    <div class="list-group">
+<div data-ng-include="'/client/templates/message.html'"></div>
+<div id="divLigas" data-ng-cloak>
+    <div class="list-group" data-ng-if="minhas">
         <div class="list-group-item">
-            <label for="ligasPart">Ligas Clássicas</label>
+            <label for="ligasPart">Minhas Ligas</label>
         </div>
         <div>
             <ligas id="ligasPart" ligas="ligas" filter="{time_dono_id: '', tipo_fase: '!F'}"></ligas>
@@ -16,7 +16,7 @@
             <ligas id="ligasCart" ligas="ligas" filter="{time_dono_id: '!'}"></ligas>
         </div>
     </div>
-    <div class="list-group">
+    <div class="list-group" data-ng-if="finalizados">
         <div class="list-group-item">
             <label for="ligasPart">Torneios Finalizados</label>
         </div>
@@ -25,3 +25,4 @@
         </div>
     </div>
 </div>
+<div data-ng-include="'client/templates/tiposLiga.html'"></div>

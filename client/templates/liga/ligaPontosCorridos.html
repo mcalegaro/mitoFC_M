@@ -1,11 +1,10 @@
 <div id="divLigaPontosCorridos">
-    <div id="divMenu" class="list-group fixedTop">
+    <div id="divMenu" class="list-group">
         <div id="divLiga" class="list-group-item inlineDiv">
             <liga-info class="fullW" ng-init="vm.liga.liga.imagem = vm.liga.liga.url_flamula_png" liga="vm.liga.liga"></liga-info>
-            <div>
-                <div id="selectButton" class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="true">
+            <div id="selectButton" class="dropdown right fixedTopRight">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="true">
                                 <div ng-switch="vm.orderProp" style="display: inline-block">
                                     <div class="glyphicon glyphicon-star" ng-switch-when="pontos.campeonato"></div>
                                     <div class="glyphicon glyphicon-step-backward" ng-switch-when="pontos.rodada"></div>
@@ -15,18 +14,17 @@
                                 </div>
                                 <div class="caret"></div>
                             </button>
-                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
-                        <li><a ng-click="vm.setOrder('pontos.campeonato')"><span class="glyphicon glyphicon-star"></span> Campeonato</a></li>
-                        <li><a ng-click="vm.setOrder('pontos.parcial')"><span class="glyphicon glyphicon-star-empty"></span> Parciais</a></li>
-                        <li><a ng-click="vm.setOrder('pontos.rodada')"><span class="glyphicon glyphicon-step-backward"></span> Última Rodada</a></li>
-                        <li><a ng-click="vm.setOrder('pontos.mes')"><span class="glyphicon glyphicon-calendar"></span> Mensal</a></li>
-                        <li><a ng-click="vm.setOrder('patrimonio')"><span class="glyphicon glyphicon-euro"></span> Patrimônio</a></li>
-                    </ul>
-                </div>
+                <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                    <li><a ng-click="vm.setOrder('pontos.campeonato')"><span class="glyphicon glyphicon-star"></span> Campeonato</a></li>
+                    <li><a ng-click="vm.setOrder('pontos.parcial')"><span class="glyphicon glyphicon-star-empty"></span> Parciais</a></li>
+                    <li><a ng-click="vm.setOrder('pontos.rodada')"><span class="glyphicon glyphicon-step-backward"></span> Última Rodada</a></li>
+                    <li><a ng-click="vm.setOrder('pontos.mes')"><span class="glyphicon glyphicon-calendar"></span> Mensal</a></li>
+                    <li><a ng-click="vm.setOrder('patrimonio')"><span class="glyphicon glyphicon-euro"></span> Patrimônio</a></li>
+                </ul>
             </div>
         </div>
     </div>
-    <div class="list-group container">
+    <div class="list-group">
         <a class="list-group-item inlineDiv" ui-sref="timeDetails({ slug: time.slug })" ng-repeat="time in vm.liga.times | orderBy:[vm.orderProp,'pontos.campeonato']:true">
             <div class="classificacao">
                 <div>

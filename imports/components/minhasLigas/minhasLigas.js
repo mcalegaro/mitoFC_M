@@ -9,11 +9,12 @@ import {
     EP_MINHASLIGAS
 } from '/client/main.js';
 import {
-    CARREGANDO, COD_ERRO
+    CARREGANDO,
+    COD_ERRO
 } from '/client/lib/messages.js';
 
 class MinhasLigasCtrl {
-    constructor($scope) {
+    constructor($scope, $filter) {
         'ngInject';
         $scope.viewModel(this);
 
@@ -55,8 +56,19 @@ class MinhasLigasCtrl {
                     console.info(response.data.ligas);
                     $scope.ligas = response.data.ligas;
                     $scope.msg = {};
-                    $scope.$digest();
                     $scope.doPopover = response.data.ligas.length > 0;
+
+                    $scope.minhas = $filter('filter')($scope.ligas, {
+                        time_dono_id: '',
+                        tipo_fase: '!F'
+                    });
+
+                    $scope.finalizados = $filter('filter')($scope.ligas, {
+                        time_dono_id: '',
+                        tipo_fase: 'F'
+                    });
+
+                    $scope.$digest();
                 }
             });
         }
