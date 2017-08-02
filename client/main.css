@@ -49,6 +49,7 @@ body {
 .ligaNome {
     font-stretch: ultra-condensed;
     font-weight: bold;
+    width: 100%;
 }
 
 .ligaDesc {
@@ -145,4 +146,15 @@ div {
 
 .watermark {
     opacity: .5;
+}
+
+.classLigaInfo {
+    display: inline-flex;
+    font-size: 9px;
+    /* color: gray; */
+    margin-left: 10px;
+}
+
+#textosLiga {
+    width: 100%;
 }

@@ -6,9 +6,25 @@
         <img ng-if="liga.mata_mata" src="{{liga.url_trofeu_png}}" height="35" onerror="this.src='http://www.freeiconspng.com/uploads/flat-shield-icon-17.png'"
         />
     </div>
-    <div>
-        <div class="ligaNome">
-            <b>{{liga.nome}}</b>
+    <div id="textosLiga">
+        <div class="inlineDiv">
+            <div class="ligaNome">
+                <b>{{liga.nome}}</b>
+            </div>
+            <div class="classLigaInfo">
+                <div data-ng-if="!liga.mata_mata && liga.camp_ranking_num" class="inlineDiv">
+                    <div style="margin-right: 5px;">{{liga.camp_ranking_num}}<sup><u>o</u></sup>/{{liga.total_times_liga}}</div>
+                    <ng-up-down data-ng-if="liga.camp_variacao_num!=0" data-ng-init="diff=liga.camp_variacao_num"/>
+                </div>
+                 <div data-ng-show="liga.mata_mata" class="inlineDiv">
+                    <div>
+                        {{liga.tipo_fase}}
+                    </div>
+                    <div>
+                        {{liga.time_eliminado ? 'eliminado' : ''}}
+                    </div>
+                 </div>  
+            </div>
         </div>
         <div class="ligaDesc">
             {{liga.descricao}}

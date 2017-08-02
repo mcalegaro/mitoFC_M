@@ -1,6 +1,8 @@
 <div style="white-space: nowrap;">
-    <span ng-if="diff > 0" class="glyphicon glyphicon-arrow-up" style="color: green"><span style="color: gray;">{{diff}}</span>
+    <span ng-if="diff > 0"><span class="glyphicon glyphicon-arrow-up" style="color: green">
+    </span> {{diff}}
     </span>
-    <span ng-if="diff < 0" class="glyphicon glyphicon-arrow-down" style="color: red"><span style="color: gray;">{{diff * -1}}</span>
+    <span data-ng-if="diff < 0"><span class="glyphicon glyphicon-arrow-down" style="color: red">
+    </span> {{diff * -1}}
     </span>
 </div>

@@ -20,7 +20,7 @@
                 <div class="pontuacao" data-ng-style="time.pontos.parcial < 0 && {'color': 'red'}">
                     {{time.pontos.parcial | number:2}}
                 </div>
-                <div ng-if="statusMercado.status_mercado == 2">
+                <div ng-if="mostrarParciais">
                     {{time.pontos.atletas}}/12
                 </div>
             </div>

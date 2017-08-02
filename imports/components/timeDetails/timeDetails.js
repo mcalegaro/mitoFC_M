@@ -25,7 +25,8 @@ class TimeDetailsCtrl {
                 $scope.$digest();
             } else {
                 $scope.statusMercado = response.data;
-                if ($scope.statusMercado != null && $scope.statusMercado.status_mercado == 2) {
+                $scope.mostrarParciais = $scope.statusMercado != null && $scope.statusMercado.status_mercado == 2 && ($stateParams.rodada == $scope.statusMercado.rodada_atual || !$stateParams.rodada);
+                if ($scope.mostrarParciais) {
                     $scope.getPontuados();
                 } else {
                     $scope.getParciais();
@@ -77,7 +78,7 @@ class TimeDetailsCtrl {
                     time.pontos.parcial = 0;
                     time.pontos.atletas = 0;
                     time.atletas.forEach(function (atleta) {
-                        if ($scope.statusMercado != null && $scope.statusMercado.status_mercado == 2) {
+                        if ($scope.mostrarParciais) {
                             var parciais = $scope.pontuados.atletas[atleta.atleta_id];
                             if (parciais != undefined && !(parciais.pontuacao == 0 && atleta.posicao_id == 6)) {
                                 atleta.parciais = parciais;
@@ -129,11 +130,13 @@ export default angular.module(name, [
         controller: TimeDetailsCtrl
     }).config(function ($stateProvider) {
         'ngInject';
-        $stateProvider.state(name, {
-            url: '/time/:slug',
-            template: '<time-details></time-details>'
-        }).state(name+'Rodada', {
-            url: '/time/:slug/:rodada',
-            template: '<time-details></time-details>'
-        });
+        $stateProvider
+            .state(name + 'Rodada', {
+                url: '/time/:slug/:rodada',
+                template: '<time-details></time-details>'
+            })
+            .state(name, {
+                url: '/time/:slug',
+                template: '<time-details></time-details>'
+            });
     });
