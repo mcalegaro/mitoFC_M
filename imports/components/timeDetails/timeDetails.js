@@ -130,6 +130,9 @@ export default angular.module(name, [
     }).config(function ($stateProvider) {
         'ngInject';
         $stateProvider.state(name, {
+            url: '/time/:slug',
+            template: '<time-details></time-details>'
+        }).state(name+'Rodada', {
             url: '/time/:slug/:rodada',
             template: '<time-details></time-details>'
         });
