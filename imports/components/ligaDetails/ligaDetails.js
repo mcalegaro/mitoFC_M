@@ -62,6 +62,9 @@ class LigaDetailsCtrl {
                 } else {
                     vm.orderProp = 'pontos.campeonato';
                     vm.liga.times.forEach(function (time) {
+                        if (time.pontos == undefined) {
+                            time.pontos = {};
+                        }
                         time.pontos.parcial = 0;
                         time.pontos.atletas = 0;
                     }, vm);

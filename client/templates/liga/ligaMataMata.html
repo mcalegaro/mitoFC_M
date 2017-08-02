@@ -1,37 +1,37 @@
 <div id="divLigaMataMata" data-ng-init="ini=vm.liga.liga.inicio_rodada">
     <div data-ng-repeat="rodada in [ini+4, ini+3, ini+2, ini+1, ini]" class="list-group">
         <!-- <div data-ng-repeat="rodada in liga.liga.inicio_rodada"> -->
-        <data-ng-show data-ng-show="statusMercado.rodada_atual >= rodada">
-            <div class="list-group-item">
-                <!-- {{rodada}}<sup><u>a</u></sup> rodada - -->
-                <h3>
-                    <data-ng-show data-ng-show="{{liga.chaves_mata_mata[rodada][0].tipo_fase=='P'}}">
-                        Primeira Fase
-                    </data-ng-show>
-                    <data-ng-show data-ng-show="{{liga.chaves_mata_mata[rodada][0].tipo_fase=='O'}}">
-                        Oitavas de Final
-                    </data-ng-show>
-                    <data-ng-show data-ng-show="{{liga.chaves_mata_mata[rodada][0].tipo_fase=='Q'}}">
-                        Quartas de Final
-                    </data-ng-show>
-                    <data-ng-show data-ng-show="{{liga.chaves_mata_mata[rodada][0].tipo_fase=='S'}}">
-                        Semi-finais
-                    </data-ng-show>
-                    <data-ng-show data-ng-show="{{liga.chaves_mata_mata[rodada][0].tipo_fase=='F'}}">
-                        Finais
-                    </data-ng-show>
-                </h3>
-            </div>
-            <div class="list-group-item" data-ng-repeat="partida in liga.chaves_mata_mata[rodada]">
-                <div id="flex" class="inlineDiv">
-                    <div id="mandante" data-ng-init="mand=getTimeById(this.partida.time_mandante_id)">
-                        <time-info time="getTimeById(this.partida.time_mandante_id)" partida="partida"></time-info>
-                    </div>
-                    <div class="versus">
-                        x
-                    </div>
-                    <div id="visitante">
-                        <time-info time="getTimeById(this.partida.time_visitante_id)" partida="partida"></time-info>
+        <data-ng-show data-ng-show="vm.statusMercado.rodada_atual >= rodada">
+            <!-- {{rodada}}<sup><u>a</u></sup> rodada - -->
+            <label>
+                <data-ng-show data-ng-show="{{vm.liga.chaves_mata_mata[rodada][0].tipo_fase=='P'}}">
+                    Primeira Fase
+                </data-ng-show>
+                <data-ng-show data-ng-show="{{vm.liga.chaves_mata_mata[rodada][0].tipo_fase=='O'}}">
+                    Oitavas de Final
+                </data-ng-show>
+                <data-ng-show data-ng-show="{{vm.liga.chaves_mata_mata[rodada][0].tipo_fase=='Q'}}">
+                    Quartas de Final
+                </data-ng-show>
+                <data-ng-show data-ng-show="{{vm.liga.chaves_mata_mata[rodada][0].tipo_fase=='S'}}">
+                    Semi-finais
+                </data-ng-show>
+                <data-ng-show data-ng-show="{{vm.liga.chaves_mata_mata[rodada][0].tipo_fase=='F'}}">
+                    Finais
+                </data-ng-show>
+            </label>
+            <div class="list-group">
+                <div class="list-group-item" data-ng-repeat="partida in vm.liga.chaves_mata_mata[rodada]">
+                    <div id="flex" class="inlineDiv">
+                        <div class="timeMataMata" ui-sref="timeDetails({ slug: vm.getTimeById(this.partida.time_mandante_id).slug, rodada: rodada })" data-ng-class="{watermark: this.partida.time_mandante_pontuacao < this.partida.time_visitante_pontuacao}">
+                            <time-info time="vm.getTimeById(this.partida.time_mandante_id)" partida="partida"></time-info>
+                        </div>
+                        <div class="versus">
+                            x
+                        </div>
+                        <div class="timeMataMata" ui-sref="timeDetails({ slug: vm.getTimeById(this.partida.time_visitante_id).slug, rodada: rodada })" data-ng-class="{watermark: this.partida.time_mandante_pontuacao > this.partida.time_visitante_pontuacao}">
+                            <time-info time="vm.getTimeById(this.partida.time_visitante_id)" partida="partida"></time-info>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -58,7 +58,11 @@ class TimeDetailsCtrl {
         }
 
         $scope.getParciais = function () {
-            HTTP.get(EP_TIME + $stateParams.slug, {}, (error, response) => {
+            var epCall = EP_TIME + $stateParams.slug;
+            if ($stateParams.rodada) {
+                epCall += '/' + $stateParams.rodada;
+            }
+            HTTP.get(epCall, {}, (error, response) => {
                 if (error) {
                     console.error(error);
                     $scope.msg = {
@@ -126,7 +130,7 @@ export default angular.module(name, [
     }).config(function ($stateProvider) {
         'ngInject';
         $stateProvider.state(name, {
-            url: '/time/:slug',
+            url: '/time/:slug/:rodada',
             template: '<time-details></time-details>'
         });
     });

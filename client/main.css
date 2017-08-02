@@ -2,7 +2,7 @@ div {
     /* border-style: groove; */
 }
 
-body{
+body {
     background-color: ghostwhite;
 }
 
@@ -72,7 +72,24 @@ div {
 }
 
 .escudo {
-    align-self: center;
+    display: block;
+    margin: 0 auto;
+    height: 35px;
+}
+
+.fotoPerfil {
+    position: relative;
+    height: 18px;
+    border-radius: 35px;
+    margin: 0 auto;
+    bottom: 18px;
+    left: 9px;
+}
+
+.nomeCartola {
+    color: gray;
+    font-style: italic;
+    font-size: 10px;
 }
 
 .clube {
@@ -97,6 +114,13 @@ div {
 
 .versus {
     margin: 10px;
+    width: 10%;
+    text-align: center;
+}
+
+.timeMataMata {
+    width: 45%;
+    cursor: pointer;
 }
 
 .fixedTopRight {
@@ -110,6 +134,15 @@ div {
     width: 100%;
 }
 
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-  display: none !important;
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+    display: none !important;
+}
+
+.watermark {
+    opacity: .5;
 }

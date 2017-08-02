@@ -2,8 +2,11 @@
 <div id="timeDetails" class="list-group">
     <div class="list-group-item">
         <div class="inlineDiv">
-            <div class="escudo">
-                <img ng-src="{{time.time.url_escudo_png}}" height="35" />
+            <div class="imgComp">
+                <img height="35" ng-src="{{time.time.url_escudo_png}}" onerror="this.src='http://www.freeiconspng.com/uploads/flat-shield-icon-17.png'"
+                />
+                <img height="18" ng-src="{{time.time.foto_perfil}}" style="border-radius: 25px; position: relative; left: -30px; top: 10px;" onerror="this.src='http://www.freeiconspng.com/uploads/customers-icon-3.png'"
+                />
             </div>
             <div class="fullW">
                 <div class="ligaNome">
