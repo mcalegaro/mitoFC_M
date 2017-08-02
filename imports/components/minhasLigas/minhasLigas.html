@@ -1,28 +1,30 @@
-<div data-ng-include="'/client/templates/message.html'"></div>
-<div id="divLigas" data-ng-cloak>
-    <div class="list-group" data-ng-if="minhas">
-        <div class="list-group-item">
+<div data-ng-cloak>
+    <div data-ng-include="'/client/templates/message.html'"></div>
+    <div id="divLigas">
+        <div class="list-group" data-ng-if="minhas">
+            <!-- <div class="list-group-item"> -->
             <label for="ligasPart">Minhas Ligas</label>
-        </div>
-        <div>
+            <!-- </div> -->
+            <!-- <div> -->
             <ligas id="ligasPart" ligas="ligas" filter="{time_dono_id: '', tipo_fase: '!F'}"></ligas>
+            <!-- </div> -->
         </div>
-    </div>
-    <div class="list-group">
-        <div class="list-group-item">
+        <div class="list-group">
+            <!-- <div class="list-group-item"> -->
             <label for="ligasCart">Ligas do Cartola</label>
-        </div>
-        <div>
+            <!-- </div> -->
+            <!-- <div> -->
             <ligas id="ligasCart" ligas="ligas" filter="{time_dono_id: '!'}"></ligas>
+            <!-- </div> -->
         </div>
-    </div>
-    <div class="list-group" data-ng-if="finalizados">
-        <div class="list-group-item">
+        <div class="list-group" data-ng-if="finalizados">
+            <!-- <div class="list-group-item"> -->
             <label for="ligasPart">Torneios Finalizados</label>
-        </div>
-        <div>
+            <!-- </div> -->
+            <!-- <div> -->
             <ligas id="ligasPart" ligas="ligas" filter="{time_dono_id: '', tipo_fase: 'F'}"></ligas>
+            <!-- </div> -->
         </div>
     </div>
+    <div data-ng-include="'client/templates/tiposLiga.html'"></div>
 </div>
-<div data-ng-include="'client/templates/tiposLiga.html'"></div>
