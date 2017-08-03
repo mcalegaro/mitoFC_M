@@ -23,14 +23,16 @@
             <div class="list-group">
                 <div class="list-group-item" data-ng-repeat="partida in vm.liga.chaves_mata_mata[rodada]">
                     <div id="flex" class="inlineDiv">
-                        <div class="timeMataMata" ui-sref="timeDetailsRodada({ slug: vm.getTimeById(this.partida.time_mandante_id).slug, rodada: rodada })" data-ng-class="{watermark: this.partida.time_mandante_pontuacao < this.partida.time_visitante_pontuacao}">
-                            <time-info time="vm.getTimeById(this.partida.time_mandante_id)" partida="partida"></time-info>
+                        <div class="timeMataMata" 
+                            ui-sref="timeDetailsRodada({ slug: vm.getTimeById(this.partida.time_mandante_id).slug, rodada: rodada })"
+                            data-ng-class="{watermark: this.partida.time_mandante_pontuacao < this.partida.time_visitante_pontuacao}">
+                            <time-info time="vm.getTimeById(this.partida.time_mandante_id)" partida="partida" pontuados="vm.pontuados"></time-info>
                         </div>
                         <div class="versus">
                             x
                         </div>
                         <div class="timeMataMata" ui-sref="timeDetailsRodada({ slug: vm.getTimeById(this.partida.time_visitante_id).slug, rodada: rodada })" data-ng-class="{watermark: this.partida.time_mandante_pontuacao > this.partida.time_visitante_pontuacao}">
-                            <time-info time="vm.getTimeById(this.partida.time_visitante_id)" partida="partida"></time-info>
+                            <time-info time="vm.getTimeById(this.partida.time_visitante_id)" partida="partida" pontuados="vm.pontuados"></time-info>
                         </div>
                     </div>
                 </div>

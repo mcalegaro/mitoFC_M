@@ -1,26 +1,33 @@
 <div class="center">
     <div class="imgComp">
-        <img class="escudo" ng-src="{{time.url_escudo_png}}" onerror="this.src='http://www.freeiconspng.com/uploads/flat-shield-icon-17.png'"
+        <img class="escudo" ng-src="{{vm.time.url_escudo_png}}" onerror="this.src='http://www.freeiconspng.com/uploads/flat-shield-icon-17.png'"
         />
-        <img class="fotoPerfil" ng-src="{{time.foto_perfil}}" onerror="this.src='http://www.freeiconspng.com/uploads/customers-icon-3.png'"
+        <img class="fotoPerfil" ng-src="{{vm.time.foto_perfil}}" onerror="this.src='http://www.freeiconspng.com/uploads/customers-icon-3.png'"
         />
     </div>
     <div class="fullW">
         <div class="ligaNome">
-            {{time.nome}}
+            {{vm.time.nome}}
         </div>
         <div class="nomeCartola">
-            {{time.nome_cartola}}
+            {{vm.time.nome_cartola}}
         </div>
     </div>
-    <div>
-        <div id="pontos" class="pontuacao" data-ng-init="pontos=getPontos()">
+    <div data-ng-init="pontos=getPontos()">
+        <div id="pontos" class="pontuacao" data-ng-if="pontos">
             <div data-ng-style="pontos < 0 && {'color': 'red'}">
                 {{pontos | number:2}}
             </div>
         </div>
-        <div data-ng-init="atletas=getAtletas()" data-ng-if="atletas">
-            {{getAtletas()}}/12
+        <div data-ng-if="!pontos" id="parciais">
+            <div class="pontuacao">
+                <div data-ng-style="vm.time.parciais.total < 0 && {'color': 'red'}">
+                    {{vm.time.parciais.total | number:2}}
+                </div>
+            </div>
+            <div>
+                {{vm.time.parciais.atletas}}/12
+            </div>
         </div>
     </div>
 </div>

@@ -1,34 +1,55 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import templateUrl from './timeInfo.html';
+import {
+    EP_TIME
+} from '/client/main.js';
 
 class TimeInfoCtrl {
-    constructor($scope, $stateParams) {
+    constructor($scope) {
         'ngInject';
         $scope.viewModel(this);
-        this.$onInit = function () {
-            $scope.time = this.time;
-            $scope.partida = this.partida;
-
-            $scope.getPontos = function () {
-                if ($scope.partida.time_mandante_pontuacao != null) {
-                    if ($scope.time.time_id == $scope.partida.time_mandante_id) {
-                        return $scope.partida.time_mandante_pontuacao;
+        var vm = this;
+        if (vm.time != null) {
+            if (vm.partida.time_mandante_pontuacao == null) {
+                var response = HTTP.get(EP_TIME + vm.time.slug, {}, (error, response) => {
+                    if (error) {
+                        console.error(error);
                     } else {
-                        return $scope.partida.time_visitante_pontuacao;
+                        vm.time.details = response.data;
+                        vm.time.parciais = {};
+                        vm.time.parciais.total = 0;
+                        vm.time.parciais.atletas = 0;
+                        vm.time.details.atletas.forEach(function (atleta) {
+                            var parciais = vm.pontuados.atletas[atleta.atleta_id];
+                            if (parciais != undefined && !(parciais.pontuacao == 0 && atleta.posicao_id == 6)) {
+                                atleta.parciais = parciais;
+                            }
+                            if (atleta.parciais != undefined) {
+                                vm.time.parciais.total += atleta.parciais.pontuacao;
+                                vm.time.parciais.atletas++;
+                                $scope.$digest();
+                            }
+                        }, this);
+                        $scope.$digest();
                     }
-                } else if ($scope.time != null) {
-                    if ($scope.time.pontos != null) {
-                        return $scope.time.pontos.parcial;
-                    }
+                });
+            }
+        }
+
+        $scope.getPontos = function () {
+            if (vm.partida.time_mandante_pontuacao != null) {
+                if (vm.time.time_id == vm.partida.time_mandante_id) {
+                    return vm.partida.time_mandante_pontuacao;
+                } else {
+                    return vm.partida.time_visitante_pontuacao;
                 }
             }
-            $scope.getAtletas = function () {
-                return 9;
-            }
+            return null;
         }
     }
 }
+
 
 const name = 'timeInfo';
 
@@ -38,7 +59,9 @@ export default angular.module(name, [
     templateUrl,
     bindings: {
         time: '<',
-        partida: '<'
+        partida: '<',
+        pontuados: '<'
     },
-    controller: TimeInfoCtrl
+    controller: TimeInfoCtrl,
+    controllerAs: 'vm'
 });

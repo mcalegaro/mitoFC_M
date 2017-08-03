@@ -28,13 +28,13 @@ class LigaDetailsCtrl {
 
         vm.msg = CARREGANDO;
         if ($.cookie("glbId")) {
-            vm.loadPage(vm, $scope);
+            vm.getStatusMercado(vm, $scope);
         } else {
             window.location.href = "/login";
         }
     }
 
-    getParciais(vm, scope) {
+    getStatusMercado(vm, scope) {
         HTTP.get(EP_ST_MERCADO, {}, (error, response) => {
             if (error) {
                 console.log(error);
@@ -46,32 +46,33 @@ class LigaDetailsCtrl {
             } else {
                 vm.statusMercado = response.data;
                 if (vm.statusMercado != null && vm.statusMercado.status_mercado == 2) {
-                    console.info("Carregando parciais...");
-                    HTTP.get(EP_PARCIAIS, {}, (error, response) => {
-                        if (error) {
-                            console.log(error);
-                            scope.$digest();
-                        } else {
-                            vm.pontuados = response.data;
-                            vm.liga.times.forEach(function (time) {
-                                vm.getParcialTime(vm, scope, time);
-                            }, vm);
-                            console.info("Parciais carregadas.");
-                        }
-                    })
+                    vm.getPontuados(vm, scope);
                 } else {
-                    vm.orderProp = 'pontos.campeonato';
-                    vm.liga.times.forEach(function (time) {
-                        if (time.pontos == undefined) {
-                            time.pontos = {};
-                        }
-                        time.pontos.parcial = 0;
-                        time.pontos.atletas = 0;
-                    }, vm);
+                    vm.getTimes(vm, scope);
+                    // vm.orderProp = 'pontos.campeonato';
+                    // vm.liga.times.forEach(function (time) {
+                    //     if (time.pontos == undefined) {
+                    //         time.pontos = {};
+                    //     }
+                    //     time.pontos.parcial = 0;
+                    //     time.pontos.atletas = 0;
+                    // }, vm);
                 }
                 scope.$digest();
             }
         });
+    }
+
+    getPontuados(vm, scope) {
+        HTTP.get(EP_PARCIAIS, {}, (error, response) => {
+            if (error) {
+                console.log(error);
+                scope.$digest();
+            } else {
+                vm.pontuados = response.data;
+                vm.getTimes(vm, scope);
+            }
+        })
     }
 
     getParcialTime(vm, scope, time) {
@@ -95,7 +96,7 @@ class LigaDetailsCtrl {
                         time.pontos.mes += atleta.parciais.pontuacao;
                         time.pontos.parcial += atleta.parciais.pontuacao;
                         time.pontos.atletas++;
-                        scope.$digest();
+                        // scope.$digest();
                     }
                 }, vm);
                 scope.$digest();
@@ -118,13 +119,14 @@ class LigaDetailsCtrl {
         this.orderProp = newOrder;
     };
 
-    loadPage(vm, scope) {
+    getTimes(vm, scope) {
+
+        //liga
         var opts = {
             headers: {
                 'X-GLB-Token': $.cookie("glbId")
             }
         };
-
         HTTP.get(EP_LIGA + vm.slug, opts, (error, response) => {
             if (error) {
                 console.log(error);
@@ -134,19 +136,15 @@ class LigaDetailsCtrl {
                 };
                 scope.$digest();
             } else {
+                vm.orderProp = 'pontos.parcial';
                 vm.msg = {};
                 vm.liga = response.data;
-                console.info(response.data);
-                vm.orderProp = 'pontos.parcial';
-                vm.getParciais(vm, scope);
-                vm.doPopover = vm.liga.liga.nome != '';
-                if (!vm.doPopover) {
-                    vm.msg = CARREGANDO;
-                    vm.msg.desc = 'Sem resultados.';
-                }
-                scope.$digest();
+                vm.liga.times.forEach(function (time) {
+                    vm.getParcialTime(vm, scope, time);
+                }, vm);
             }
         });
+        //liga
     };
 
 }
