@@ -56,14 +56,6 @@ class LigaDetailsCtrl {
                         vm.getPontuados(vm, scope);
                     } else {
                         vm.getTimes(vm, scope);
-                        vm.orderProp = 'pontos.campeonato';
-                        vm.liga.times.forEach(function (time) {
-                            if (time.pontos == undefined) {
-                                time.pontos = {};
-                            }
-                            time.pontos.parcial = 0;
-                            time.pontos.atletas = 0;
-                        }, vm);
                     }
                     scope.$digest();
                 }
@@ -144,12 +136,24 @@ class LigaDetailsCtrl {
                 };
                 scope.$digest();
             } else {
-                vm.orderProp = 'pontos.parcial';
-                vm.msg = {};
                 vm.liga = response.data;
-                vm.liga.times.forEach(function (time) {
-                    vm.getParcialTime(vm, scope, time);
-                }, vm);
+                vm.msg = {};
+                if (vm.statusMercado != null && vm.statusMercado.status_mercado == 2) {
+                    vm.orderProp = 'pontos.parcial';
+                    vm.liga.times.forEach(function (time) {
+                        vm.getParcialTime(vm, scope, time);
+                    }, vm);
+                } else {
+                    vm.orderProp = 'pontos.campeonato';
+                    vm.liga.times.forEach(function (time) {
+                        if (time.pontos == undefined) {
+                            time.pontos = {};
+                        }
+                        time.pontos.parcial = 0;
+                        time.pontos.atletas = 0;
+                    }, vm);
+                }
+                scope.$digest();
             }
         });
         //liga

@@ -29,7 +29,7 @@ class MitoMenuCtrl {
             } else {
                 vm.statusMercado = response.data;
                 if (vm.statusMercado.status_mercado != 4) {
-                    this.getUserInfo(this, $scope);
+                    this.getUserInfo(this, scope);
                 }
             }
         })
