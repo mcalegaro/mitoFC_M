@@ -1,34 +1,34 @@
 <div ng-include="'/client/templates/message.html'"></div>
-<div id="timeDetails" class="list-group">
+<div id="timeDetails" class="list-group" data-ng-show="vm.time.time.url_escudo_png">
     <div class="list-group-item">
         <div class="inlineDiv">
             <div class="imgComp">
-                <img height="35" ng-src="{{time.time.url_escudo_png}}" onerror="this.src='http://www.freeiconspng.com/uploads/flat-shield-icon-17.png'"
+                <img height="35" ng-src="{{vm.time.time.url_escudo_png}}" onerror="this.src='http://www.freeiconspng.com/uploads/flat-shield-icon-17.png'"
                 />
-                <img height="18" ng-src="{{time.time.foto_perfil}}" style="border-radius: 25px; position: relative; left: -30px; top: 10px;" onerror="this.src='http://www.freeiconspng.com/uploads/customers-icon-3.png'"
-                />
+                <img height="18" ng-src="{{vm.time.time.foto_perfil}}" style="border-radius: 25px; position: relative; left: -30px; top: 10px;"
+                    onerror="this.src='http://www.freeiconspng.com/uploads/customers-icon-3.png'" />
             </div>
             <div class="fullW">
                 <div class="ligaNome">
-                    {{time.time.nome}}
+                    {{vm.time.time.nome}}
                 </div>
                 <div class="ligaDesc">
-                    {{time.time.nome_cartola}}
+                    {{vm.time.time.nome_cartola}}
                 </div>
             </div>
             <div class="right">
-                <div class="pontuacao" data-ng-style="time.pontos.parcial < 0 && {'color': 'red'}">
-                    {{time.pontos.parcial | number:2}}
+                <div class="pontuacao" data-ng-style="vm.time.pontos.parcial < 0 && {'color': 'red'}">
+                    {{vm.time.pontos.parcial | number:2}}
                 </div>
                 <div ng-if="mostrarParciais">
-                    {{time.pontos.atletas}}/12
+                    {{vm.time.pontos.atletas}}/12
                 </div>
             </div>
         </div>
     </div>
 </div>
 <div class="list-group">
-    <a ng-repeat="atleta in time.atletas | orderBy:['posicao_id','apelido']" class="list-group-item" ng-click="showHideScouts(atleta.atleta_id);">
+    <a ng-repeat="atleta in vm.time.atletas | orderBy:['posicao_id','apelido']" class="list-group-item" ng-click="vm.showHideScouts(atleta.atleta_id);">
         <div class="inlineDiv">
             <div class="escudo">
                 <img src="/imgs/{{atleta.clube_id}}.png" height="30" />
@@ -36,8 +36,8 @@
             <div class="fullW">
                 <div class="ligaNome">{{atleta.apelido}}</div>
                 <div class="inlineDiv">
-                    <div class="clube">{{time.clubes[atleta.clube_id].nome}}</div>
-                    <div class="posicaoJogador">{{time.posicoes[atleta.posicao_id].nome}}</div>
+                    <div class="clube">{{vm.time.clubes[atleta.clube_id].nome}}</div>
+                    <div class="posicaoJogador">{{vm.time.posicoes[atleta.posicao_id].nome}}</div>
                 </div>
             </div>
             <!-- <div class="posicaoJogador">

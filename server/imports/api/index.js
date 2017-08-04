@@ -28,16 +28,24 @@ export function setupApi() {
             headers: hdr,
             body: JSON.stringify(req.data)
         };
-        req.pipe(request(opts)).pipe(res);
+        try {
+            req.pipe(request(opts)).pipe(res);
+        } catch (error) {
+            console.error(error)
+        }
     });
     app.post('/api', (req, res) => {
         var uri = req.url.replace('/api?url=', '');
         console.info(uri);
         var body = req.body;
-        request.post({
-            url: uri,
-            json: body
-        }).pipe(res);
+        try {
+            request.post({
+                url: uri,
+                json: body
+            }).pipe(res);
+        } catch (error) {
+            console.error(error)
+        }
     });
     WebApp.connectHandlers.use(app);
 }

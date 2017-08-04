@@ -13,9 +13,10 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul id="menuItems" class="nav navbar-nav navbar-right" data-ng-click="$('#navbar').removeClass('in')">
-                <li onclick="$('#navbar').removeClass('in');"><a href="/meuLogin"><span class="glyphicon glyphicon-user"></span> Meus Dados</a></li>
-                <li onclick="$('#navbar').removeClass('in');"><a href="/meuTime"><span class="glyphicon glyphicon-list-alt"></span> Meu Time</a></li>
-                <li onclick="$('#navbar').removeClass('in');"><a href="/minhasLigas"><span class="glyphicon glyphicon-bookmark"></span> Minhas Ligas</a></li>
+                <li onclick="$('.navbar-toggle').click();"><a href="/meuLogin"><span class="glyphicon glyphicon-user"></span> Meus Dados</a></li>
+                <!-- <li onclick="$('#navbar').removeClass('in');"><a href="/meuLogin"><span class="glyphicon glyphicon-user"></span> Meus Dados</a></li> -->
+                <li onclick="$('.navbar-toggle').click();"><a href="/time/{{vm.slug}}"><span class="glyphicon glyphicon-list-alt"></span> Meu Time</a></li>
+                <li onclick="$('.navbar-toggle').click();"><a href="/minhasLigas"><span class="glyphicon glyphicon-bookmark"></span> Minhas Ligas</a></li>
                 <!-- <li><a href="#ligasSearch">Procurar Ligas</a></li> -->
                 <!-- <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Más <span class="caret"></span></a>

@@ -3,7 +3,6 @@ import angularMeteor from 'angular-meteor';
 import mitoMenu from '../imports/components/mitoMenu/mitoMenu';
 import mitoMsg from '../imports/components/mitoMsg/mitoMsg';
 import meuLogin from '../imports/components/meuLogin/meuLogin';
-import meuTime from '../imports/components/meuTime/meuTime';
 import minhasLigas from '../imports/components/minhasLigas/minhasLigas';
 import ligas from '../imports/components/ligas/ligas';
 import ligasList from '../imports/components/ligasList/ligasList';
@@ -22,7 +21,6 @@ angular.module(name, [
     mitoMenu.name,
     mitoMsg.name,
     meuLogin.name,
-    meuTime.name,
     minhasLigas.name,
     ligas.name,
     ligasList.name,
@@ -39,7 +37,7 @@ angular.module(name, [
 
     $locationProvider.html5Mode(true);
 
-    $urlRouterProvider.otherwise('/meuTime');
+    $urlRouterProvider.otherwise('/meuLogin');
   });
 
 const PROXY = window.location.origin + "/api?url=";

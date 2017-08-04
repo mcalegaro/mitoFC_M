@@ -1,5 +1,5 @@
 export const CARREGANDO = {
-    cod: 'info',
+    cod: 'loading',
     desc: 'Carregando...'
 };
 

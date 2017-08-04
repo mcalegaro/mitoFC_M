@@ -17,6 +17,7 @@ class MinhasLigasCtrl {
     constructor($scope, $filter) {
         'ngInject';
         $scope.viewModel(this);
+        var vm = this;
 
         $scope.$watch("doPopover", function (value) {
             if (value) {
@@ -33,37 +34,34 @@ class MinhasLigasCtrl {
             }
         });
 
-        // this.$onInit = () => {
-        $scope.msg = CARREGANDO;
-        $scope.doPopover = false;
-        $scope.glbId = $.cookie("glbId");
-        if (!$scope.glbId) {
+        vm.msg = CARREGANDO;
+        vm.doPopover = false;
+        if (!$.cookie("glbId")) {
             window.location.href = "/login";
         } else {
             HTTP.get(EP_MINHASLIGAS, {
                 headers: {
-                    'X-GLB-TOKEN': $scope.glbId
+                    'X-GLB-TOKEN': $.cookie("glbId")
                 }
             }, (error, response) => {
                 if (error) {
                     console.error(error);
-                    $scope.msg = {
+                    vm.msg = {
                         cod: COD_ERRO,
                         desc: error
                     }
                     $scope.$digest();
                 } else {
-                    console.info(response.data.ligas);
-                    $scope.ligas = response.data.ligas;
-                    $scope.msg = {};
-                    $scope.doPopover = response.data.ligas.length > 0;
+                    vm.ligas = response.data.ligas;
+                    vm.msg = {};
+                    vm.doPopover = response.data.ligas.length > 0;
 
-                    $scope.minhas = $filter('filter')($scope.ligas, {
+                    vm.minhas = $filter('filter')(vm.ligas, {
                         time_dono_id: '',
                         tipo_fase: '!F'
                     });
 
-                    $scope.finalizados = $filter('filter')($scope.ligas, {
+                    vm.finalizados = $filter('filter')(vm.ligas, {
                         time_dono_id: '',
                         tipo_fase: 'F'
                     });
@@ -72,14 +70,14 @@ class MinhasLigasCtrl {
                 }
             });
         }
-        // };
     }
 }
 
 const name = 'minhasLigas';
 export default angular.module(name, [angularMeteor, uiRouter]).component(name, {
     templateUrl,
-    controller: MinhasLigasCtrl
+    controller: MinhasLigasCtrl,
+    controllerAs: 'vm'
 }).config(function ($stateProvider) {
     'ngInject';
     $stateProvider.state(

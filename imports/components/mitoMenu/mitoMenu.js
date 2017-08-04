@@ -40,6 +40,7 @@ class MitoMenuCtrl {
         }, function (error, response) {
             if (!error) {
                 vm.logged = true;
+                vm.slug = response.data.time.slug;
             } else {
                 console.error(error);
             }

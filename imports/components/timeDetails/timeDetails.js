@@ -17,48 +17,49 @@ class TimeDetailsCtrl {
     constructor($scope, $stateParams) {
         'ngInject';
         $scope.viewModel(this);
-        $scope.msg = CARREGANDO;
+        var vm = this;
+        vm.msg = CARREGANDO;
 
         HTTP.get(EP_ST_MERCADO, {}, (error, response) => {
             if (error) {
                 console.log(error);
                 $scope.$digest();
             } else {
-                $scope.statusMercado = response.data;
-                $scope.mostrarParciais = $scope.statusMercado != null && $scope.statusMercado.status_mercado == 2 && ($stateParams.rodada == $scope.statusMercado.rodada_atual || !$stateParams.rodada);
-                if ($scope.mostrarParciais) {
-                    $scope.getPontuados();
+                vm.statusMercado = response.data;
+                vm.mostrarParciais = vm.statusMercado != null && vm.statusMercado.status_mercado == 2 && ($stateParams.rodada == vm.statusMercado.rodada_atual || !$stateParams.rodada);
+                if (vm.mostrarParciais) {
+                    vm.getPontuados();
                 } else {
-                    $scope.getParciais();
+                    vm.getParciais();
                 }
                 $scope.$digest();
             }
         });
 
-        $scope.setFormatoFoto = function (url) {
+        vm.setFormatoFoto = function (url) {
             return url.replace("_FORMATO", "_50x50");
         }
 
-        $scope.getPontuados = function () {
+        vm.getPontuados = function () {
             console.debug("Carregando parciais...");
             HTTP.get(EP_PARCIAIS, {}, (error, response) => {
                 if (error) {
                     console.error(error);
                     $scope.$digest();
                 } else {
-                    $scope.pontuados = response.data;
+                    vm.pontuados = response.data;
                     console.debug("Parciais carregadas.");
-                    $scope.getParciais();
+                    vm.getParciais();
                     $scope.$digest();
                 }
             })
         };
 
-        $scope.showHideScouts = function (atleta_id) {
+        vm.showHideScouts = function (atleta_id) {
             $('#divScouts_' + atleta_id).slideToggle();
         }
 
-        $scope.getParciais = function () {
+        vm.getParciais = function () {
             var epCall = EP_TIME + $stateParams.slug;
             if ($stateParams.rodada) {
                 epCall += '/' + $stateParams.rodada;
@@ -66,20 +67,20 @@ class TimeDetailsCtrl {
             HTTP.get(epCall, {}, (error, response) => {
                 if (error) {
                     console.error(error);
-                    $scope.msg = {
+                    vm.msg = {
                         cod: COD_ERRO,
                         desc: error
                     }
                     $scope.$digest();
                 } else {
-                    $scope.time = response.data;
-                    var time = $scope.time;
+                    vm.time = response.data;
+                    var time = vm.time;
                     time.pontos = {};
                     time.pontos.parcial = 0;
                     time.pontos.atletas = 0;
                     time.atletas.forEach(function (atleta) {
-                        if ($scope.mostrarParciais) {
-                            var parciais = $scope.pontuados.atletas[atleta.atleta_id];
+                        if (vm.mostrarParciais) {
+                            var parciais = vm.pontuados.atletas[atleta.atleta_id];
                             if (parciais != undefined && !(parciais.pontuacao == 0 && atleta.posicao_id == 6)) {
                                 atleta.parciais = parciais;
                             }
@@ -111,7 +112,7 @@ class TimeDetailsCtrl {
                         }
 
                     }, this);
-                    $scope.msg = '';
+                    vm.msg = '';
                     $scope.$digest();
                 }
             })
@@ -127,7 +128,8 @@ export default angular.module(name, [
     ])
     .component(name, {
         templateUrl,
-        controller: TimeDetailsCtrl
+        controller: TimeDetailsCtrl,
+        controllerAs: 'vm'
     }).config(function ($stateProvider) {
         'ngInject';
         $stateProvider

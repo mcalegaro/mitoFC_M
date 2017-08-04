@@ -8,42 +8,41 @@ import {
     EP_MEUTIME
 } from '/client/main.js';
 import {
-    CARREGANDO, COD_ERRO
+    CARREGANDO,
+    COD_ERRO
 } from '/client/lib/messages.js';
 
 class MeuLoginCtrl {
     constructor($scope) {
         'ngInject';
         $scope.viewModel(this);
-        $scope.user = {};
-        $scope.msg = CARREGANDO;
-        this.$onInit = function () {
+        var vm = this;
+        vm.user = {};
+        vm.msg = CARREGANDO;
 
-            if ($.cookie("glbId")) {
-                HTTP.get(EP_MEUTIME, {
-                    headers: {
-                        'X-GLB-TOKEN': $.cookie("glbId")
+        if ($.cookie("glbId")) {
+            HTTP.get(EP_MEUTIME, {
+                headers: {
+                    'X-GLB-TOKEN': $.cookie("glbId")
+                }
+            }, (error, response) => {
+                if (error) {
+                    console.error(error);
+                    vm.msg = {
+                        cod: COD_ERRO,
+                        desc: error
                     }
-                }, (error, response) => {
-                    if (error) {
-                        console.error(error);
-                        $scope.msg = {
-                            cod: COD_ERRO,
-                            desc: error
-                        }
-                    } else {
-                        console.info(response.data);
-                        $scope.time = response.data.time;
-                        $scope.msg = {};
-                        $scope.$digest();
-                    }
-                });
-            } else {
-                window.location.href = "/login";
-            }
-        };
+                } else {
+                    vm.time = response.data.time;
+                    vm.msg = {};
+                    $scope.$digest();
+                }
+            });
+        } else {
+            window.location.href = "/login";
+        }
 
-        $scope.logout = () => {
+        vm.logout = () => {
             $.removeCookie("glbId", {
                 path: '/'
             });
@@ -56,7 +55,8 @@ class MeuLoginCtrl {
 const name = 'meuLogin';
 export default angular.module(name, [angularMeteor]).component(name, {
     templateUrl,
-    controller: MeuLoginCtrl
+    controller: MeuLoginCtrl,
+    controllerAs: 'vm'
 }).config(function ($stateProvider) {
     'ngInject';
     $stateProvider.state(

@@ -1,13 +1,13 @@
 <div ng-include="'/client/templates/message.html'"></div>
-<div id="info" ng-cloak>
+<div id="info" data-ng-show="vm.time.foto_perfil">
     <div class="list-group center">
         <div class="list-group-item">
             <div>
-                <img ng-src="{{time.foto_perfil}}" class="roundedImage" height="50" onerror="this.src='http://www.freeiconspng.com/uploads/customers-icon-3.png'"
+                <img ng-src="{{vm.time.foto_perfil}}" class="roundedImage" height="50" onerror="this.src='http://www.freeiconspng.com/uploads/customers-icon-3.png'"
                 />
             </div>
             <div>
-                <h2 id="nomeCartoleiro"> {{time.nome_cartola}} </h2>
+                <h2 id="nomeCartoleiro"> {{vm.time.nome_cartola}} </h2>
             </div>
         </div>
     </div>
@@ -15,20 +15,20 @@
         <div class="list-group-item">
             <h3 class="mitoInfo">
                 <div>
-                    <img ng-src="{{time.url_camisa_png}}" width="100vw" onerror="this.src='http://www.freeiconspng.com/uploads/blank-t-shirt-png-0.png'"
+                    <img ng-src="{{vm.time.url_camisa_png}}" width="100vw" onerror="this.src='http://www.freeiconspng.com/uploads/blank-t-shirt-png-0.png'"
                     />
-                    <img ng-src="{{time.url_escudo_png}}" width="50vw" onerror="this.src='http://www.freeiconspng.com/uploads/flat-shield-icon-17.png'"
+                    <img ng-src="{{vm.time.url_escudo_png}}" width="50vw" onerror="this.src='http://www.freeiconspng.com/uploads/flat-shield-icon-17.png'"
                     />
                 </div>
                 <div>
-                    <strong>{{time.nome}}</strong> - Desde {{time.temporada_inicial}}
+                    <strong>{{vm.time.nome}}</strong> - Desde {{vm.time.temporada_inicial}}
                 </div>
             </h3>
         </div>
     </div>
     <!-- <div class="list-group center"> -->
     <!-- <div class="list-group-item"> -->
-    <button class="btn btn-danger btn-lg btn-block" ng-click="logout()">Sair</button>
+    <button class="btn btn-danger btn-lg btn-block" ng-click="vm.logout()">Sair</button>
     <!-- </div> -->
     <!-- </div> -->
     <!-- <login></login> -->

@@ -1,5 +1,8 @@
 <div ng-if="vm.msg">
-    <div ng-if="vm.msg.cod=='sucesso'" class="alert alert-success" role="alert">{{vm.msg.desc}}</div>
-    <div ng-if="vm.msg.cod=='info'" class="alert alert-info" role="alert">{{vm.msg.desc}}</div>
-    <div ng-if="vm.msg.cod=='erro'" class="alert alert-danger" role="alert">{{vm.msg.desc}}</div>
+    <div data-ng-if="vm.msg.cod=='loading'" class="divCenter">
+        <div class="loader"></div>
+    </div>
+    <div data-ng-if="vm.msg.cod=='sucesso'" class="alert alert-success" role="alert">{{vm.msg.desc}}</div>
+    <div data-ng-if="vm.msg.cod=='info'" class="alert alert-info" role="alert">{{vm.msg.desc}}</div>
+    <div data-ng-if="vm.msg.cod=='erro'" class="alert alert-danger" role="alert">{{vm.msg.desc}}</div>
 </div>
