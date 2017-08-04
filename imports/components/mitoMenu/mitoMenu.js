@@ -2,6 +2,9 @@ import templateUrl from './mitoMenu.html';
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import {
+    HTTP
+} from 'meteor/http';
+import {
     CARREGANDO,
     COD_ERRO
 } from '/client/lib/messages.js';
@@ -13,21 +16,21 @@ import {
 class MitoMenuCtrl {
     constructor($scope) {
         'ngInject';
-        this.$onInit = function () {
-            if ($.cookie("glbId") != undefined) {
-                this.getStatusMercado(this);
-                this.getUserInfo(this, $scope);
-            }
-        };
+        if ($.cookie("glbId") != undefined) {
+            this.getStatusMercado(this, $scope);
+        }
     }
 
-    getStatusMercado(vm) {
+    getStatusMercado(vm, scope) {
         vm.msg = CARREGANDO;
         HTTP.get(EP_ST_MERCADO, {}, (error, response) => {
             if (error) {
                 console.log(error);
             } else {
                 vm.statusMercado = response.data;
+                if (vm.statusMercado.status_mercado != 4) {
+                    this.getUserInfo(this, $scope);
+                }
             }
         })
     }

@@ -26,13 +26,21 @@ class TimeDetailsCtrl {
                 $scope.$digest();
             } else {
                 vm.statusMercado = response.data;
-                vm.mostrarParciais = vm.statusMercado != null && vm.statusMercado.status_mercado == 2 && ($stateParams.rodada == vm.statusMercado.rodada_atual || !$stateParams.rodada);
-                if (vm.mostrarParciais) {
-                    vm.getPontuados();
+                if (vm.statusMercado.status_mercado == 4) {
+                    vm.msg = {
+                        cod: COD_ERRO,
+                        desc: 'Mercado em manutenção. Tente mais tarde );'
+                    }
+                    $scope.$digest();
                 } else {
-                    vm.getParciais();
+                    vm.mostrarParciais = vm.statusMercado != null && vm.statusMercado.status_mercado == 2 && ($stateParams.rodada == vm.statusMercado.rodada_atual || !$stateParams.rodada);
+                    if (vm.mostrarParciais) {
+                        vm.getPontuados();
+                    } else {
+                        vm.getParciais();
+                    }
+                    $scope.$digest();
                 }
-                $scope.$digest();
             }
         });
 

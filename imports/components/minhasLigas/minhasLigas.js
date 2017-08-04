@@ -6,6 +6,7 @@ import {
     HTTP
 } from 'meteor/http';
 import {
+    EP_ST_MERCADO,
     EP_MINHASLIGAS
 } from '/client/main.js';
 import {
@@ -36,40 +37,63 @@ class MinhasLigasCtrl {
 
         vm.msg = CARREGANDO;
         vm.doPopover = false;
-        if (!$.cookie("glbId")) {
-            window.location.href = "/login";
-        } else {
-            HTTP.get(EP_MINHASLIGAS, {
-                headers: {
-                    'X-GLB-TOKEN': $.cookie("glbId")
+
+        HTTP.get(EP_ST_MERCADO, {}, (error, response) => {
+            if (error) {
+                console.log(error);
+                vm.msg = {
+                    cod: COD_ERRO,
+                    desc: error
                 }
-            }, (error, response) => {
-                if (error) {
-                    console.error(error);
+                $scope.$digest();
+            } else {
+                vm.statusMercado = response.data;
+                if (vm.statusMercado.status_mercado == 4) {
                     vm.msg = {
                         cod: COD_ERRO,
-                        desc: error
+                        desc: 'Mercado em manutenção. Tente mais tarde );'
                     }
                     $scope.$digest();
                 } else {
-                    vm.ligas = response.data.ligas;
-                    vm.msg = {};
-                    vm.doPopover = response.data.ligas.length > 0;
+                    //
+                    if (!$.cookie("glbId")) {
+                        window.location.href = "/login";
+                    } else {
+                        HTTP.get(EP_MINHASLIGAS, {
+                            headers: {
+                                'X-GLB-TOKEN': $.cookie("glbId")
+                            }
+                        }, (error, response) => {
+                            if (error) {
+                                console.error(error);
+                                vm.msg = {
+                                    cod: COD_ERRO,
+                                    desc: error
+                                }
+                                $scope.$digest();
+                            } else {
+                                vm.ligas = response.data.ligas;
+                                vm.msg = {};
+                                vm.doPopover = response.data.ligas.length > 0;
 
-                    vm.minhas = $filter('filter')(vm.ligas, {
-                        time_dono_id: '',
-                        tipo_fase: '!F'
-                    });
+                                vm.minhas = $filter('filter')(vm.ligas, {
+                                    time_dono_id: '',
+                                    tipo_fase: '!F'
+                                });
 
-                    vm.finalizados = $filter('filter')(vm.ligas, {
-                        time_dono_id: '',
-                        tipo_fase: 'F'
-                    });
+                                vm.finalizados = $filter('filter')(vm.ligas, {
+                                    time_dono_id: '',
+                                    tipo_fase: 'F'
+                                });
 
-                    $scope.$digest();
+                                $scope.$digest();
+                            }
+                        });
+                    }
                 }
-            });
-        }
+            }
+        });
+
     }
 }
 

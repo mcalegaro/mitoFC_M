@@ -45,20 +45,28 @@ class LigaDetailsCtrl {
                 scope.$digest();
             } else {
                 vm.statusMercado = response.data;
-                if (vm.statusMercado != null && vm.statusMercado.status_mercado == 2) {
-                    vm.getPontuados(vm, scope);
+                if (vm.statusMercado.status_mercado == 4) {
+                    vm.msg = {
+                        cod: COD_ERRO,
+                        desc: 'Mercado em manutenção. Tente mais tarde );'
+                    }
+                    scope.$digest();
                 } else {
-                    vm.getTimes(vm, scope);
-                    vm.orderProp = 'pontos.campeonato';
-                    vm.liga.times.forEach(function (time) {
-                        if (time.pontos == undefined) {
-                            time.pontos = {};
-                        }
-                        time.pontos.parcial = 0;
-                        time.pontos.atletas = 0;
-                    }, vm);
+                    if (vm.statusMercado != null && vm.statusMercado.status_mercado == 2) {
+                        vm.getPontuados(vm, scope);
+                    } else {
+                        vm.getTimes(vm, scope);
+                        vm.orderProp = 'pontos.campeonato';
+                        vm.liga.times.forEach(function (time) {
+                            if (time.pontos == undefined) {
+                                time.pontos = {};
+                            }
+                            time.pontos.parcial = 0;
+                            time.pontos.atletas = 0;
+                        }, vm);
+                    }
+                    scope.$digest();
                 }
-                scope.$digest();
             }
         });
     }

@@ -5,6 +5,7 @@ import {
     HTTP
 } from 'meteor/http';
 import {
+    EP_ST_MERCADO,
     EP_MEUTIME
 } from '/client/main.js';
 import {
@@ -19,37 +20,62 @@ class MeuLoginCtrl {
         var vm = this;
         vm.user = {};
         vm.msg = CARREGANDO;
+        vm.getStatusMercado(vm, $scope);
+    }
 
-        if ($.cookie("glbId")) {
-            HTTP.get(EP_MEUTIME, {
-                headers: {
-                    'X-GLB-TOKEN': $.cookie("glbId")
+    getStatusMercado(vm, scope) {
+        vm.msg = CARREGANDO;
+        HTTP.get(EP_ST_MERCADO, {}, (error, response) => {
+            if (error) {
+                console.log(error);
+                msg = {
+                    cod: COD_ERRO,
+                    desc: error
                 }
-            }, (error, response) => {
-                if (error) {
-                    console.error(error);
-                    vm.msg = {
-                        cod: COD_ERRO,
-                        desc: error
+                scope.$digest();
+            } else {
+                vm.statusMercado = response.data;
+                if (vm.statusMercado.status_mercado != 4) {
+                    if ($.cookie("glbId")) {
+                        HTTP.get(EP_MEUTIME, {
+                            headers: {
+                                'X-GLB-TOKEN': $.cookie("glbId")
+                            }
+                        }, (error, response) => {
+                            if (error) {
+                                console.error(error);
+                                vm.msg = {
+                                    cod: COD_ERRO,
+                                    desc: error
+                                }
+                                scope.$digest();
+                            } else {
+                                vm.time = response.data.time;
+                                vm.msg = {};
+                                scope.$digest();
+                            }
+                        });
+                    } else {
+                        window.location.href = "/login";
                     }
                 } else {
-                    vm.time = response.data.time;
-                    vm.msg = {};
-                    $scope.$digest();
+                    vm.msg = {
+                        cod: COD_ERRO,
+                        desc: 'Mercado em manutenção. Tente mais tarde );'
+                    }
+                    scope.$digest();
                 }
-            });
-        } else {
-            window.location.href = "/login";
-        }
-
-        vm.logout = () => {
-            $.removeCookie("glbId", {
-                path: '/'
-            });
-            window.location.href = "/login";
-        }
-
+            }
+        })
     }
+
+    logout() {
+        $.removeCookie("glbId", {
+            path: '/'
+        });
+        window.location.href = "/login";
+    }
+
 }
 
 const name = 'meuLogin';
