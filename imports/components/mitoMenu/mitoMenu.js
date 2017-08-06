@@ -28,6 +28,19 @@ class MitoMenuCtrl {
                 console.log(error);
             } else {
                 vm.statusMercado = response.data;
+                switch (vm.statusMercado.status_mercado) {
+                    case 1:
+                        var fecha = vm.statusMercado.fechamento;
+                        var minutos = fecha.minuto > 0 ? ':' + fecha.minuto : 'h'
+                        vm.descricaoMercado = 'Mercado fecha às ' + fecha.hora + minutos + ' - ' + fecha.dia +'/'+fecha.mes;
+                        break;
+                    case 2:
+                        vm.descricaoMercado = 'Mercado Fechado';
+                        break;
+                    case 4:
+                        vm.descricaoMercado = 'Mercado em manutenção';
+                    break;
+                }
                 if (vm.statusMercado.status_mercado != 4) {
                     this.getUserInfo(this, scope);
                 }

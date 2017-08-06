@@ -28,7 +28,7 @@
         </div>
         <div class="ligaDesc">
             {{liga.descricao}}
-            <ng-show ng-show="{{liga.vencedor}}">
+            <ng-show data-ng-show="{{liga.vencedor.nome}}">
                 <br/>Campeão: {{liga.vencedor.nome}}
             </ng-show>
         </div>

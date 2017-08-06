@@ -6,9 +6,9 @@ class LigaInfoCtrl {
     constructor($scope) {
         $scope.viewModel(this);
         var self = this;
-        self.$onInit = function () {
+        // self.$onInit = function () {
             // console.info(self.liga);
-        };
+        // };
     }
 }
 

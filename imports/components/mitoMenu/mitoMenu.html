@@ -9,10 +9,11 @@
               <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#">MitoFC</a>
+            <a class="navbar-brand descMercado" href="#" data-ng-if="vm.descricaoMercado">{{vm.descricaoMercado}}</a>
             <!-- <a class="navbar-brand" href="#" style="display: none" class="logged" id="nomeUsuario"></a> -->
         </div>
         <div id="navbar" class="collapse navbar-collapse">
-            <ul id="menuItems" class="nav navbar-nav navbar-right" data-ng-click="$('#navbar').removeClass('in')">
+            <ul id="menuItems" class="nav navbar-nav navbar-right" data-ng-if="vm.logged">
                 <!-- <li onclick="$('.navbar-toggle').click();"><a href="/meuLogin"><span class="glyphicon glyphicon-user"></span> Meus Dados</a></li> -->
                 <li onclick="$('#navbar').hasClass('in') ? $('.navbar-toggle').click() : ''"><a href="/meuLogin"><span class="glyphicon glyphicon-user"></span> Meus Dados</a></li>
                 <li onclick="$('#navbar').hasClass('in') ? $('.navbar-toggle').click() : ''"><a href="/time/{{vm.slug}}"><span class="glyphicon glyphicon-list-alt"></span> Meu Time</a></li>

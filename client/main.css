@@ -129,11 +129,23 @@ div {
     cursor: pointer;
 }
 
-.fixedTopRight {
+.fixedTop {
     position: fixed;
     z-index: 1;
-    top: 54px;
-    right: 14px;
+    left: 0px;
+    width: 100%;
+    top: 51px;
+}
+
+.fixedTopRight {
+    position: fixed;
+    z-index: 2;
+    top: 52px;
+    right: 5px;
+}
+
+.body2 {
+    margin-top: 70px;
 }
 
 .input-group {
@@ -168,22 +180,34 @@ div {
     font-size: 18px;
 }
 
+.descMercado {
+    font-size: 10px;
+}
+
 .loader {
-  border: 10px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 10px solid lightblue;
-  width: 70px;
-  height: 70px;
-  -webkit-animation: spin .5s linear infinite;
-  animation: spin .5s linear infinite;
+    border: 10px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 10px solid lightblue;
+    width: 70px;
+    height: 70px;
+    -webkit-animation: spin .5s linear infinite;
+    animation: spin .5s linear infinite;
 }
 
 @-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

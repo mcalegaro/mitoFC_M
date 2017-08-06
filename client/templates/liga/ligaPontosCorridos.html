@@ -1,8 +1,8 @@
 <div id="divLigaPontosCorridos">
-    <div id="divMenu" class="list-group">
-        <div id="divLiga" class="list-group-item inlineDiv">
-            <liga-info class="fullW" ng-init="vm.liga.liga.imagem = vm.liga.liga.url_flamula_png" liga="vm.liga.liga"></liga-info>
-            <div id="selectButton" class="dropdown right fixedTopRight">
+    <!-- <div id="divMenu" class="list-group">
+        <div id="divLiga" class="list-group-item inlineDiv"> -->
+            <!-- <liga-info class="fullW" ng-init="vm.liga.liga.imagem = vm.liga.liga.url_flamula_png" liga="vm.liga.liga"></liga-info> -->
+            <!-- <div id="selectButton" class="dropdown right fixedTopRight">
                 <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="true">
                                 <div ng-switch="vm.orderProp" style="display: inline-block">
@@ -21,9 +21,9 @@
                     <li class="selectItem"><a ng-click="vm.setOrder('pontos.mes')"><span class="glyphicon glyphicon-calendar"></span> Mensal</a></li>
                     <li class="selectItem"><a ng-click="vm.setOrder('patrimonio')"><span class="glyphicon glyphicon-euro"></span> Patrimônio</a></li>
                 </ul>
-            </div>
-        </div>
-    </div>
+            </div> -->
+        <!-- </div> -->
+    <!-- </div> -->
     <div class="list-group">
         <a class="list-group-item inlineDiv" ui-sref="timeDetails({ slug: time.slug })" ng-repeat="time in vm.liga.times | orderBy:[vm.orderProp,'pontos.campeonato']:true">
             <div class="classificacao">
