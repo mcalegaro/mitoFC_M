@@ -1,5 +1,5 @@
 <div id="divLigas">
-    <a ng-repeat="liga in $ctrl.ligas | filter:$ctrl.filter | orderBy:['nome']" class="list-group-item inlineDiv" ui-sref="ligaDetails({ slug: liga.slug })">
+    <a ng-repeat="liga in $ctrl.ligas | filter: $ctrl.filter | orderBy:['nome']" class="list-group-item inlineDiv" ui-sref="ligaDetails({ slug: liga.slug })">
         <liga-info class="fullW" liga="liga"></liga-info>
         <div class="right">
             <liga-tipo liga="liga"></liga-tipo>

@@ -2,12 +2,12 @@
 <div data-ng-show="vm.ligas">
     <div data-ng-include="'/client/templates/message.html'"></div>
     <div id="divLigas">
-        <div class="list-group" data-ng-if="vm.minhas">
+        <div class="list-group" data-ng-if="vm.minhas.length > 0">
             <!-- <div class="list-group-item"> -->
             <label for="ligasPart">Minhas Ligas</label>
             <!-- </div> -->
             <!-- <div> -->
-            <ligas id="ligasPart" ligas="vm.minhas">
+            <ligas id="ligasPart" ligas="vm.minhas" filter="vm.minhasFilter">
                 <!-- <ligas id="ligasPart" ligas="vm.ligas" filter="{time_dono_id: '', tipo_fase: '!F'}"> -->
             </ligas>
             <!-- </div> -->
@@ -20,12 +20,12 @@
             <ligas id="ligasCart" ligas="vm.ligas" filter="{time_dono_id: '!'}"></ligas>
             <!-- </div> -->
         </div>
-        <div class="list-group" data-ng-if="vm.finalizados">
+        <div class="list-group" data-ng-if="vm.finalizados.length > 0">
             <!-- <div class="list-group-item"> -->
             <label for="ligasPart">Torneios Finalizados</label>
             <!-- </div> -->
             <!-- <div> -->
-            <ligas id="ligasPart" ligas="vm.finalizados"></ligas>
+            <ligas id="ligasPart" ligas="vm.finalizados" filter="vm.finalizadosFilter"></ligas>
             <!-- <ligas id="ligasPart" ligas="ligas" filter="{time_dono_id: '', tipo_fase: 'F'}"></ligas> -->
             <!-- </div> -->
         </div>

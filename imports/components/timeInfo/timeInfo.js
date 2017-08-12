@@ -20,17 +20,19 @@ class TimeInfoCtrl {
                         vm.time.parciais = {};
                         vm.time.parciais.total = 0;
                         vm.time.parciais.atletas = 0;
-                        vm.time.details.atletas.forEach(function (atleta) {
-                            var parciais = vm.pontuados.atletas[atleta.atleta_id];
-                            if (parciais != undefined && !(parciais.pontuacao == 0 && atleta.posicao_id == 6)) {
-                                atleta.parciais = parciais;
-                            }
-                            if (atleta.parciais != undefined) {
-                                vm.time.parciais.total += atleta.parciais.pontuacao;
-                                vm.time.parciais.atletas++;
-                                $scope.$digest();
-                            }
-                        }, this);
+                        if (vm.pontuados) {
+                            vm.time.details.atletas.forEach(function (atleta) {
+                                var parciais = vm.pontuados.atletas[atleta.atleta_id];
+                                if (parciais != undefined && !(parciais.pontuacao == 0 && atleta.posicao_id == 6)) {
+                                    atleta.parciais = parciais;
+                                }
+                                if (atleta.parciais != undefined) {
+                                    vm.time.parciais.total += atleta.parciais.pontuacao;
+                                    vm.time.parciais.atletas++;
+                                    $scope.$digest();
+                                }
+                            }, this);
+                        }
                         $scope.$digest();
                     }
                 });

@@ -38,6 +38,14 @@ class MinhasLigasCtrl {
         vm.msg = CARREGANDO;
         vm.doPopover = false;
 
+        vm.minhasFilter = function(liga){
+            return liga.vencedor == null;
+        }
+
+        vm.finalizadosFilter = function(liga){
+            return liga.vencedor != null;
+        }
+
         HTTP.get(EP_ST_MERCADO, {}, (error, response) => {
             if (error) {
                 console.log(error);
@@ -77,13 +85,11 @@ class MinhasLigasCtrl {
                                 vm.doPopover = response.data.ligas.length > 0;
 
                                 vm.minhas = $filter('filter')(vm.ligas, {
-                                    time_dono_id: '',
-                                    tipo_fase: '!F'
+                                    time_dono_id: ''
                                 });
 
                                 vm.finalizados = $filter('filter')(vm.ligas, {
-                                    time_dono_id: '',
-                                    tipo_fase: 'F'
+                                    time_dono_id: ''
                                 });
 
                                 $scope.$digest();
