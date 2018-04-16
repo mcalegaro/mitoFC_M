@@ -111,6 +111,15 @@ div {
     align-self: flex-end;
 }
 
+.capitao {
+    font-size: 9px;
+    align-self: flex-end;
+    margin-left: 6px;
+    background-color: black;
+    color: white;
+    padding: 0px 15px;
+}
+
 .scoutInfo {
     white-space: nowrap;
     font-size: 9px;

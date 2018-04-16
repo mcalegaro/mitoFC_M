@@ -87,6 +87,7 @@ class TimeDetailsCtrl {
                     time.pontos.parcial = 0;
                     time.pontos.atletas = 0;
                     time.atletas.forEach(function (atleta) {
+                        console.info(atleta);
                         if (vm.mostrarParciais) {
                             var parciais = vm.pontuados.atletas[atleta.atleta_id];
                             if (parciais != undefined && !(parciais.pontuacao == 0 && atleta.posicao_id == 6)) {
@@ -113,6 +114,9 @@ class TimeDetailsCtrl {
                                     "pts": scoutPts
                                 });
                             };
+                            if (atleta.atleta_id == time.capitao_id) {
+                                atleta.parciais.pontuacao = 2 * atleta.parciais.pontuacao;
+                            }
                             if (!(atleta.parciais.pontuacao == 0 && atleta.posicao_id == 6)) {
                                 time.pontos.atletas++;
                             }

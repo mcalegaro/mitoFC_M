@@ -42,7 +42,9 @@
                         <div class="inlineDiv">
                             <div class="clube">{{vm.time.clubes[atleta.clube_id].nome}}</div>
                             <div class="posicaoJogador">{{vm.time.posicoes[atleta.posicao_id].nome}}</div>
+                            <div class="capitao">{{atleta.atleta_id == vm.time.capitao_id ? "C" : ""}}</div>
                         </div>
+                        
                     </div>
                     <!-- <div class="posicaoJogador">
                     {{atleta.parciais.scoutInfo}}
