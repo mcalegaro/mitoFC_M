@@ -51,7 +51,12 @@
                     <!-- <div class="posicaoJogador">
                     {{atleta.parciais.scoutInfo}}
                 </div> -->
-                    <div class="pontuacao right" ng-style="atleta.parciais.pontuacao < 0 && {'color': 'red'}">{{atleta.parciais.pontuacao | number:2}}</div>
+                    <div ng-if="atleta.atleta_id == vm.time.capitao_id">
+                        <div class="pontuacao right" ng-style="atleta.parciais.pontuacao*2 < 0 && {'color': 'red'}">{{atleta.parciais.pontuacao*2 | number:2}}</div>
+                    </div>
+                    <div ng-if="atleta.atleta_id != vm.time.capitao_id">
+                        <div class="pontuacao right" ng-style="atleta.parciais.pontuacao < 0 && {'color': 'red'}">{{atleta.parciais.pontuacao | number:2}}</div>
+                    </div>
                 </div>
                 <div id="divScouts_{{atleta.atleta_id}}" style="display: none;">
                     <div ng-repeat="scout in atleta.parciais.scoutDesc" class="scoutInfo">

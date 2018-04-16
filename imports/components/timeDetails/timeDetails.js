@@ -113,12 +113,13 @@ class TimeDetailsCtrl {
                                     "pts": scoutPts
                                 });
                             };
+                            
+                            vm.time.pontos.parcial += atleta.parciais.pontuacao;
                             if (atleta.atleta_id == time.capitao_id) {
-                                atleta.parciais.pontuacao *= 2;
+                                vm.time.pontos.parcial += atleta.parciais.pontuacao;
                             }
-                            time.pontos.parcial += atleta.parciais.pontuacao;
                             if (!(atleta.parciais.pontuacao == 0 && atleta.posicao_id == 6)) {
-                                time.pontos.atletas++;
+                                vm.time.pontos.atletas++;
                             }
                             $scope.$digest();
                         }
