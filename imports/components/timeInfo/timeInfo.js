@@ -27,6 +27,9 @@ class TimeInfoCtrl {
                                     atleta.parciais = parciais;
                                 }
                                 if (atleta.parciais != undefined) {
+                                    if (atleta.atleta_id == vm.time.capitao_id) {
+                                        atleta.parciais.pontuacao *= 2;
+                                    }
                                     vm.time.parciais.total += atleta.parciais.pontuacao;
                                     vm.time.parciais.atletas++;
                                     $scope.$digest();

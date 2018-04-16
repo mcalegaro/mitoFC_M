@@ -99,7 +99,6 @@ class TimeDetailsCtrl {
                             atleta.parciais.scout = atleta.scout;
                         }
                         if (atleta.parciais != undefined) {
-                            time.pontos.parcial += atleta.parciais.pontuacao;
                             var scoutAux = atleta.parciais.scout;
                             atleta.parciais.scoutInfo = JSON.stringify(scoutAux).replace(/\"|\{|\}/g, "").replace(/\,/g, ", ");
                             atleta.parciais.scoutDesc = [];
@@ -115,8 +114,9 @@ class TimeDetailsCtrl {
                                 });
                             };
                             if (atleta.atleta_id == time.capitao_id) {
-                                atleta.parciais.pontuacao = 2 * atleta.parciais.pontuacao;
+                                atleta.parciais.pontuacao *= 2;
                             }
+                            time.pontos.parcial += atleta.parciais.pontuacao;
                             if (!(atleta.parciais.pontuacao == 0 && atleta.posicao_id == 6)) {
                                 time.pontos.atletas++;
                             }
@@ -135,9 +135,9 @@ class TimeDetailsCtrl {
 const name = 'timeDetails';
 
 export default angular.module(name, [
-        angularMeteor,
-        uiRouter
-    ])
+    angularMeteor,
+    uiRouter
+])
     .component(name, {
         templateUrl,
         controller: TimeDetailsCtrl,

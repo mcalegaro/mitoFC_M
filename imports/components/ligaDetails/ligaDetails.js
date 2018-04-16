@@ -88,6 +88,9 @@ class LigaDetailsCtrl {
                 time.details.atletas.forEach(function (atleta) {
                     var parciais = vm.pontuados.atletas[atleta.atleta_id];
                     if (parciais != undefined && !(parciais.pontuacao == 0 && atleta.posicao_id == 6)) {
+                        if (atleta.atleta_id == time.details.capitao_id) {
+                            parciais.pontuacao *= 2;
+                        }
                         atleta.parciais = parciais;
                     }
                     // atleta.parciais = vm.pontuados.atletas[atleta.atleta_id];

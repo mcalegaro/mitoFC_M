@@ -49,7 +49,6 @@ body {
 .ligaNome {
     font-stretch: ultra-condensed;
     font-weight: bold;
-    width: 100%;
 }
 
 .ligaDesc {
@@ -113,11 +112,11 @@ div {
 
 .capitao {
     font-size: 9px;
-    align-self: flex-end;
     margin-left: 6px;
-    background-color: black;
+    background-color: darkred;
     color: white;
     padding: 0px 15px;
+    font-weight: 900;
 }
 
 .scoutInfo {

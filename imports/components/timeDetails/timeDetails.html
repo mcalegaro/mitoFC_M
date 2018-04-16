@@ -38,13 +38,15 @@
                         <img src="/imgs/{{atleta.clube_id}}.png" height="30" />
                     </div>
                     <div class="fullW">
-                        <div class="ligaNome">{{atleta.apelido}}</div>
+                        <div class="inlineDiv">
+                            <div class="ligaNome">{{atleta.apelido}}</div>
+                            <div class="capitao">{{atleta.atleta_id == vm.time.capitao_id ? "C" : ""}}</div>
+                        </div>
                         <div class="inlineDiv">
                             <div class="clube">{{vm.time.clubes[atleta.clube_id].nome}}</div>
                             <div class="posicaoJogador">{{vm.time.posicoes[atleta.posicao_id].nome}}</div>
-                            <div class="capitao">{{atleta.atleta_id == vm.time.capitao_id ? "C" : ""}}</div>
                         </div>
-                        
+
                     </div>
                     <!-- <div class="posicaoJogador">
                     {{atleta.parciais.scoutInfo}}
@@ -53,7 +55,8 @@
                 </div>
                 <div id="divScouts_{{atleta.atleta_id}}" style="display: none;">
                     <div ng-repeat="scout in atleta.parciais.scoutDesc" class="scoutInfo">
-                        <span>{{scout.descricao}}</span><span class="pontuacao" data-ng-style="scout.pts < 0 && {'color':'red'}">&nbsp;{{scout.pts | number:1}}</span>
+                        <span>{{scout.descricao}}</span>
+                        <span class="pontuacao" data-ng-style="scout.pts < 0 && {'color':'red'}">&nbsp;{{scout.pts | number:1}}</span>
                     </div>
                 </div>
             </a>
