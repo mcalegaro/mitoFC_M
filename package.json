@@ -12,6 +12,6 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "meteor-node-stubs": "~0.2.4",
-    "request": "^2.81.0"
+    "request": "^2.88.0"
   }
 }
