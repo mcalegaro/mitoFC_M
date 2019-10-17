@@ -49,4 +49,4 @@ export const EP_ST_MERCADO = PROXY + PFX_API + "/mercado/status";
 export const EP_LIGAS = PROXY + PFX_API + "/ligas?q=";
 export const EP_LIGA = PROXY + PFX_API + "/auth/liga/"; //{slug}
 export const EP_PARCIAIS = PROXY + PFX_API + "/atletas/pontuados";
-export const EP_TIME = PROXY + PFX_API + "/time/slug/"; //{slug}
+export const EP_TIME = PROXY + PFX_API + "/time/id/"; //{id}

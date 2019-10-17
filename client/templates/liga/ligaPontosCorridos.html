@@ -25,7 +25,7 @@
         <!-- </div> -->
     <!-- </div> -->
     <div class="list-group">
-        <a class="list-group-item inlineDiv" ui-sref="timeDetails({ slug: time.slug })" ng-repeat="time in vm.liga.times | orderBy:[vm.orderProp,'pontos.campeonato']:true">
+        <a class="list-group-item inlineDiv" ui-sref="timeDetails({ slug: time.time_id })" ng-repeat="time in vm.liga.times | orderBy:[vm.orderProp,'pontos.campeonato']:true">
             <div class="classificacao">
                 <div>
                     {{$index+1}}<sup><u>o</u></sup>

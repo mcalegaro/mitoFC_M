@@ -56,7 +56,7 @@ class MitoMenuCtrl {
         }, function (error, response) {
             if (!error) {
                 vm.logged = true;
-                vm.slug = response.data.time.slug;
+                vm.time_id = response.data.time.time_id;
             } else {
                 console.error(error);
             }

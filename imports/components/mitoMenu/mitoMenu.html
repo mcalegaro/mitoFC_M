@@ -16,7 +16,7 @@
             <ul id="menuItems" class="nav navbar-nav navbar-right" data-ng-if="vm.logged">
                 <!-- <li onclick="$('.navbar-toggle').click();"><a href="/meuLogin"><span class="glyphicon glyphicon-user"></span> Meus Dados</a></li> -->
                 <li onclick="$('#navbar').hasClass('in') ? $('.navbar-toggle').click() : ''"><a href="/meuLogin"><span class="glyphicon glyphicon-user"></span> Meus Dados</a></li>
-                <li onclick="$('#navbar').hasClass('in') ? $('.navbar-toggle').click() : ''"><a href="/time/{{vm.slug}}"><span class="glyphicon glyphicon-list-alt"></span> Meu Time</a></li>
+                <li onclick="$('#navbar').hasClass('in') ? $('.navbar-toggle').click() : ''"><a href="/time/{{vm.time_id}}"><span class="glyphicon glyphicon-list-alt"></span> Meu Time</a></li>
                 <li onclick="$('#navbar').hasClass('in') ? $('.navbar-toggle').click() : ''"><a href="/minhasLigas"><span class="glyphicon glyphicon-bookmark"></span> Minhas Ligas</a></li>
                 <!-- <li><a href="#ligasSearch">Procurar Ligas</a></li> -->
                 <!-- <li class="dropdown">

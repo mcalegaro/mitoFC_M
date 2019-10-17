@@ -79,7 +79,7 @@ class LigaDetailsCtrl {
         if (!time.pontos) time.pontos = {};
         time.pontos.parcial = 0.0;
         time.pontos.atletas = 0;
-        HTTP.get(EP_TIME + time.slug, {}, (error, response) => {
+        HTTP.get(EP_TIME + time.time_id, {}, (error, response) => {
             if (error) {
                 console.log(error);
                 scope.$digest();
