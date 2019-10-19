@@ -3,7 +3,7 @@
        "descricao":"Roubada de bola",
        "descricaoPl":"Roubadas de bola",
        "obs":"",
-       "pts": 1.7
+       "pts": 1.5
     },
    "FC": {
        "descricao":"Falta cometida",
@@ -15,7 +15,7 @@
        "descricao":"Gol contra",
        "descricaoPl":"Gols contra",
        "obs":"",
-       "pts": -6
+       "pts": -5
     },
    "CA": {
        "descricao":"Cartão amarelo",
@@ -72,19 +72,19 @@
        "descricao":"Finalização na trave",
        "descricaoPl":"Finalizações na trave",
        "obs":"",
-       "pts": 3.5
+       "pts": 3
     },
    "FD": {
        "descricao":"Finalização defendida",
        "descricaoPl":"Finalizações defendidas",
        "obs":"",
-       "pts": 1
+       "pts": 1.2
     },
    "FF": {
        "descricao":"Finalização para fora",
        "descricaoPl":"Finalizações para fora",
        "obs":"",
-       "pts": 0.7
+       "pts": 0.8
     },
    "G": {
        "descricao":"Gol",
@@ -102,6 +102,6 @@
        "descricao":"Pênalti perdido",
        "descricaoPl":"Pênaltis perdidos",
        "obs":"",
-       "pts": -3.5
+       "pts": -4
     }
 }
