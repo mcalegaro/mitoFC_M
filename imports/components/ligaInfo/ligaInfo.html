@@ -14,7 +14,7 @@
             <div class="classLigaInfo">
                 <div data-ng-if="!liga.mata_mata && liga.camp_ranking_num" class="inlineDiv">
                     <div style="margin-right: 5px;">{{liga.camp_ranking_num}}<sup><u>o</u></sup>/{{liga.total_times_liga}}</div>
-                    <ng-up-down data-ng-if="liga.camp_variacao_num!=0" data-ng-init="diff=liga.camp_variacao_num"/>
+                    <ng-up-down data-ng-if="liga.camp_variacao_num!=0" data-ng-init="diff=liga.camp_variacao_num"></ng-up-down>
                 </div>
                  <div data-ng-show="liga.mata_mata" class="inlineDiv">
                     <!-- <div>
