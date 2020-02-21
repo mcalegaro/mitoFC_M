@@ -1,17 +1,9 @@
-import templateUrl from './meuLogin.html';
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
-import {
-    HTTP
-} from 'meteor/http';
-import {
-    EP_ST_MERCADO,
-    EP_MEUTIME
-} from '/client/main.js';
-import {
-    CARREGANDO,
-    COD_ERRO
-} from '/client/lib/messages.js';
+import { HTTP } from 'meteor/http';
+import templateUrl from './meuLogin.html';
+import { CARREGANDO, COD_ERRO, getMsg } from '/client/lib/messages.js';
+import { EP_MEUTIME, EP_ST_MERCADO } from '/client/main.js';
 
 class MeuLoginCtrl {
     constructor($scope) {
@@ -51,7 +43,7 @@ class MeuLoginCtrl {
                                 scope.$digest();
                             } else {
                                 vm.time = response.data.time;
-                                vm.msg = {};
+                                getMsg(vm);
                                 scope.$digest();
                             }
                         });
@@ -87,7 +79,8 @@ export default angular.module(name, [angularMeteor]).component(name, {
     'ngInject';
     $stateProvider.state(
         name, {
-            url: '/' + name,
-            template: '<meu-login></meu-login>'
-        });
+        url: '/' + name,
+        template: '<meu-login></meu-login>'
+    });
 })
+

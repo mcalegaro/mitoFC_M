@@ -12,6 +12,7 @@ import {
     CARREGANDO,
     COD_ERRO
 } from '/client/lib/messages.js';
+import { getMsg } from '../../../client/lib/messages';
 
 class TimeDetailsCtrl {
     constructor($scope, $stateParams) {
@@ -86,46 +87,48 @@ class TimeDetailsCtrl {
                     time.pontos = {};
                     time.pontos.parcial = 0;
                     time.pontos.atletas = 0;
-                    time.atletas.forEach(function (atleta) {
-                        console.info(atleta);
-                        if (vm.mostrarParciais) {
-                            var parciais = vm.pontuados.atletas[atleta.atleta_id];
-                            if (parciais != undefined && !(parciais.pontuacao == 0 && atleta.posicao_id == 6)) {
-                                atleta.parciais = parciais;
+                    if (time.atletas != undefined) {
+                        time.atletas.forEach(function (atleta) {
+                            console.info(atleta);
+                            if (vm.mostrarParciais) {
+                                var parciais = vm.pontuados.atletas[atleta.atleta_id];
+                                if (parciais != undefined && !(parciais.pontuacao == 0 && atleta.posicao_id == 6)) {
+                                    atleta.parciais = parciais;
+                                }
+                            } else {
+                                atleta.parciais = {};
+                                atleta.parciais.pontuacao = atleta.pontos_num;
+                                atleta.parciais.scout = atleta.scout;
                             }
-                        } else {
-                            atleta.parciais = {};
-                            atleta.parciais.pontuacao = atleta.pontos_num;
-                            atleta.parciais.scout = atleta.scout;
-                        }
-                        if (atleta.parciais != undefined) {
-                            var scoutAux = atleta.parciais.scout;
-                            atleta.parciais.scoutInfo = JSON.stringify(scoutAux).replace(/\"|\{|\}/g, "").replace(/\,/g, ", ");
-                            atleta.parciais.scoutDesc = [];
-                            for (var scout in scoutAux) {
-                                var scoutDesc = scoutAux[scout] + " " + (scoutAux[scout] > 1 ? scoutsJson[scout].descricaoPl : scoutsJson[scout].descricao) + ": ";
-                                var pts = new Number(scoutsJson[scout].pts);
-                                var qtd = new Number(scoutAux[scout]);
-                                var scoutPts = qtd * pts;
-                                scoutDesc + scoutPts.toFixed(1);
-                                atleta.parciais.scoutDesc.push({
-                                    "descricao": scoutDesc,
-                                    "pts": scoutPts
-                                });
-                            };
-                            
-                            vm.time.pontos.parcial += atleta.parciais.pontuacao;
-                            if (atleta.atleta_id == time.capitao_id) {
-                                vm.time.pontos.parcial += atleta.parciais.pontuacao;
-                            }
-                            if (!(atleta.parciais.pontuacao == 0 && atleta.posicao_id == 6)) {
-                                vm.time.pontos.atletas++;
-                            }
-                            $scope.$digest();
-                        }
+                            if (atleta.parciais != undefined) {
+                                var scoutAux = atleta.parciais.scout;
+                                atleta.parciais.scoutInfo = JSON.stringify(scoutAux).replace(/\"|\{|\}/g, "").replace(/\,/g, ", ");
+                                atleta.parciais.scoutDesc = [];
+                                for (var scout in scoutAux) {
+                                    var scoutDesc = scoutAux[scout] + " " + (scoutAux[scout] > 1 ? scoutsJson[scout].descricaoPl : scoutsJson[scout].descricao) + ": ";
+                                    var pts = new Number(scoutsJson[scout].pts);
+                                    var qtd = new Number(scoutAux[scout]);
+                                    var scoutPts = qtd * pts;
+                                    scoutDesc + scoutPts.toFixed(1);
+                                    atleta.parciais.scoutDesc.push({
+                                        "descricao": scoutDesc,
+                                        "pts": scoutPts
+                                    });
+                                };
 
-                    }, this);
-                    vm.msg = '';
+                                vm.time.pontos.parcial += atleta.parciais.pontuacao;
+                                if (atleta.atleta_id == time.capitao_id) {
+                                    vm.time.pontos.parcial += atleta.parciais.pontuacao;
+                                }
+                                if (!(atleta.parciais.pontuacao == 0 && atleta.posicao_id == 6)) {
+                                    vm.time.pontos.atletas++;
+                                }
+                                $scope.$digest();
+                            }
+
+                        }, this);
+                    }
+                    getMsg(vm);
                     $scope.$digest();
                 }
             })

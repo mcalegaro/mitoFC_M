@@ -11,7 +11,8 @@ import {
 } from '/client/main.js';
 import {
     CARREGANDO,
-    COD_ERRO
+    COD_ERRO,
+    getMsg
 } from '/client/lib/messages.js';
 
 class MinhasLigasCtrl {
@@ -38,11 +39,11 @@ class MinhasLigasCtrl {
         vm.msg = CARREGANDO;
         vm.doPopover = false;
 
-        vm.minhasFilter = function(liga){
+        vm.minhasFilter = function (liga) {
             return liga.vencedor == null;
         }
 
-        vm.finalizadosFilter = function(liga){
+        vm.finalizadosFilter = function (liga) {
             return liga.vencedor != null;
         }
 
@@ -81,8 +82,8 @@ class MinhasLigasCtrl {
                                 $scope.$digest();
                             } else {
                                 vm.ligas = response.data.ligas;
-                                vm.msg = {};
-                                vm.doPopover = response.data.ligas.length > 0;
+                                getMsg(vm);
+                                vm.doPopover = response.data.ligas != undefined && response.data.ligas.length > 0;
 
                                 vm.minhas = $filter('filter')(vm.ligas, {
                                     time_dono_id: ''
@@ -112,7 +113,7 @@ export default angular.module(name, [angularMeteor, uiRouter]).component(name, {
     'ngInject';
     $stateProvider.state(
         name, {
-            url: '/' + name,
-            template: '<minhas-ligas></minhas-ligas>'
-        });
+        url: '/' + name,
+        template: '<minhas-ligas></minhas-ligas>'
+    });
 });

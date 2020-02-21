@@ -39,6 +39,8 @@ class MitoMenuCtrl {
                         break;
                     case 4:
                         vm.descricaoMercado = 'Mercado em manutenção';
+                    case 6:
+                        vm.descricaoMercado = 'Temporada em recesso';
                     break;
                 }
                 if (vm.statusMercado.status_mercado != 4) {
@@ -56,7 +58,9 @@ class MitoMenuCtrl {
         }, function (error, response) {
             if (!error) {
                 vm.logged = true;
-                vm.time_id = response.data.time.time_id;
+                if (response.data.time != undefined) {
+                    vm.time_id = response.data.time.time_id;
+                }
             } else {
                 console.error(error);
             }
