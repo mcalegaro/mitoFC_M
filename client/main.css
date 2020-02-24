@@ -226,4 +226,16 @@ pre {
     white-space: -pre-wrap;      /* Opera 4-6 */
     white-space: -o-pre-wrap;    /* Opera 7 */
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+    margin: 0px;
+    color: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    word-break: unset;
+}
+
+.alertlogin{
+    margin-bottom: 0px;
 }

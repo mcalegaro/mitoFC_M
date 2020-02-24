@@ -8,7 +8,7 @@ export const CARREGANDO = {
 export const COD_ERRO = 'erro';
 export const MSG_RECESSO = {
     cod: 'info',
-    desc: 'Aguardando retorno da temporada. Pontos:\n'
+    desc: 'Aguardando retorno da temporada. Pontuação:\n'
         // + new DOMParser().parseFromString(JSON.stringify(scouts, null, '\t').split("\n").join('<br/>'), 'text/html').getElementsByTagName('body').valueOf()[0].innerHTML
         + JSON.stringify(scouts, null, ' ')
 };
