@@ -27,3 +27,4 @@ angular:angular
 mrt:fittext
 rzymek:moment-locale-pt-br
 angular
+angular:angular-sanitize

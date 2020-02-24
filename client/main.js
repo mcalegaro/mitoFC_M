@@ -34,7 +34,7 @@ angular.module(name, [
   ])
   .config(function ($locationProvider, $urlRouterProvider) {
     'ngInject';
-
+    
     $locationProvider.html5Mode(true);
 
     $urlRouterProvider.otherwise('/meuLogin');
