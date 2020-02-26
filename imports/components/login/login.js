@@ -53,6 +53,10 @@ class LoginCtrl {
                         expires: 365,
                         path: '/'
                     });
+                    $.cookie("glbIdUser", $scope.user.id, {
+                        expires: 365,
+                        path: "/"
+                    })
                     gotoMeuTime();
                     $scope.$digest();
                 }
