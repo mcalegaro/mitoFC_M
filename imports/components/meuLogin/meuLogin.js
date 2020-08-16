@@ -44,6 +44,7 @@ class MeuLoginCtrl {
                             } else {
                                 vm.time = response.data.time;
                                 getMsg(vm);
+                                vm.idCartoleiro = $.cookie("glbIdUser");
                                 scope.$digest();
                             }
                         });
@@ -64,6 +65,9 @@ class MeuLoginCtrl {
     logout() {
         $.removeCookie("glbId", {
             path: '/'
+        });
+        $.removeCookie("glbIdUser", {
+            path: "/"
         });
         window.location.href = "/login";
     }

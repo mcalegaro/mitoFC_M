@@ -31,7 +31,7 @@ class LoginCtrl {
                     "payload": {
                         "email": $scope.user.id,
                         "password": $scope.user.password,
-                        "serviceId": 438
+                        "serviceId": 6860
                     }
                 }
             };
@@ -53,6 +53,10 @@ class LoginCtrl {
                         expires: 365,
                         path: '/'
                     });
+                    $.cookie("glbIdUser", $scope.user.id, {
+                        expires: 365,
+                        path: "/"
+                    })
                     gotoMeuTime();
                     $scope.$digest();
                 }

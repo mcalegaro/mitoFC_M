@@ -1,163 +1,169 @@
 div {
-    /* border-style: groove; */
+  /* border-style: groove; */
 }
 
 body {
-    background-color: ghostwhite;
+  background-color: #2a2a2a;
+  color: #fff;
+}
+
+.list-group-item {
+    background-color: #2a2a2a;
+    border: 1px solid transparent;
 }
 
 .container-main {
-    padding-top: 70px;
-    min-width: 260px;
+  padding-top: 70px;
+  min-width: 260px;
 }
 
 .list-group-item div {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .roundedImage {
-    border-radius: 200px;
+  border-radius: 200px;
 }
 
 .fullW {
-    width: 100%;
+  width: 100%;
 }
 
 .right {
-    text-align: right;
-    margin-left: 10px;
+  text-align: right;
+  margin-left: 10px;
 }
 
 .center {
-    text-align: center;
+  text-align: center;
 }
 
 .classificacao {
-    min-width: 20px;
+  min-width: 20px;
 }
 
 .imgComp {
-    white-space: nowrap;
-    min-width: 50px;
+  white-space: nowrap;
+  min-width: 50px;
 }
 
 .inlineDiv {
-    display: inline-flex;
-    width: 100%;
+  display: inline-flex;
+  width: 100%;
 }
 
 .ligaNome {
-    font-stretch: ultra-condensed;
-    font-weight: bold;
+  font-stretch: ultra-condensed;
+  font-weight: bold;
 }
 
 .ligaDesc {
-    color: gray;
-    font-style: italic;
-    font-size: 10px;
-    text-align: justify;
+  color: gray;
+  font-style: italic;
+  font-size: 10px;
+  text-align: justify;
 }
 
 img {
-    margin: 6px;
+  margin: 6px;
 }
 
 .pontuacao {
-    color: darkgreen;
-    font-weight: bold;
+  color: darkgreen;
+  font-weight: bold;
 }
 
 div {
-    align-self: center;
+  align-self: center;
 }
 
 .divCenter {
-    display: table;
-    margin: 0 auto;
+  display: table;
+  margin: 0 auto;
 }
 
 .escudo {
-    display: block;
-    margin: 0 auto;
-    height: 35px;
+  display: block;
+  margin: 0 auto;
+  height: 35px;
 }
 
 .fotoPerfil {
-    position: relative;
-    height: 18px;
-    border-radius: 35px;
-    margin: 0 auto;
-    bottom: 18px;
-    left: 9px;
+  position: relative;
+  height: 18px;
+  border-radius: 35px;
+  margin: 0 auto;
+  bottom: 18px;
+  left: 9px;
 }
 
 .nomeCartola {
-    color: gray;
-    font-style: italic;
-    font-size: 10px;
+  color: gray;
+  font-style: italic;
+  font-size: 10px;
 }
 
 .clube {
-    font-size: 10px;
-    margin-right: 10px;
-    white-space: nowrap;
-    align-self: flex-end;
+  font-size: 10px;
+  margin-right: 10px;
+  white-space: nowrap;
+  align-self: flex-end;
 }
 
 .posicaoJogador {
-    font-size: 9px;
-    color: gray;
-    align-self: flex-end;
+  font-size: 9px;
+  color: gray;
+  align-self: flex-end;
 }
 
 .capitao {
-    font-size: 9px;
-    margin-left: 6px;
-    background-color: darkred;
-    color: white;
-    padding: 0px 15px;
-    font-weight: 900;
+  font-size: 9px;
+  margin-left: 6px;
+  background-color: darkred;
+  color: white;
+  padding: 0px 15px;
+  font-weight: 900;
 }
 
 .scoutInfo {
-    white-space: nowrap;
-    font-size: 9px;
-    margin-right: 6px;
-    display: inline-flex;
+  white-space: nowrap;
+  font-size: 9px;
+  margin-right: 6px;
+  display: inline-flex;
 }
 
 .versus {
-    margin: 10px;
-    width: 10%;
-    text-align: center;
+  margin: 10px;
+  width: 10%;
+  text-align: center;
 }
 
 .timeMataMata {
-    width: 45%;
-    cursor: pointer;
+  width: 45%;
+  cursor: pointer;
 }
 
 .fixedTop {
-    position: fixed;
-    z-index: 1;
-    left: 0px;
-    width: 100%;
-    top: 51px;
+  position: fixed;
+  z-index: 1;
+  left: 0px;
+  width: 100%;
+  top: 51px;
 }
 
 .fixedTopRight {
-    position: fixed;
-    z-index: 2;
-    top: 52px;
-    right: 5px;
+  position: fixed;
+  z-index: 2;
+  top: 52px;
+  right: 5px;
 }
 
 .body2 {
-    margin-top: 70px;
+  margin-top: 70px;
 }
 
 .input-group {
-    width: 100%;
+  width: 100%;
 }
 
 [ng\:cloak],
@@ -166,76 +172,77 @@ div {
 [x-ng-cloak],
 .ng-cloak,
 .x-ng-cloak {
-    display: none !important;
+  display: none !important;
 }
 
 .watermark {
-    opacity: .5;
+  opacity: 0.5;
 }
 
 .classLigaInfo {
-    display: inline-flex;
-    font-size: 9px;
-    /* color: gray; */
-    margin-left: 10px;
+  display: inline-flex;
+  font-size: 9px;
+  /* color: gray; */
+  margin-left: 10px;
 }
 
 #textosLiga {
-    width: 100%;
+  width: 100%;
 }
 
 .selectItem {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .descMercado {
-    font-size: 10px;
+  font-size: 10px;
 }
 
 .loader {
-    border: 10px solid #f3f3f3;
-    border-radius: 50%;
-    border-top: 10px solid lightblue;
-    width: 70px;
-    height: 70px;
-    -webkit-animation: spin .5s linear infinite;
-    animation: spin .5s linear infinite;
+  border: 10px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 10px solid lightblue;
+  width: 70px;
+  height: 70px;
+  -webkit-animation: spin 0.5s linear infinite;
+  animation: spin 0.5s linear infinite;
 }
 
 @-webkit-keyframes spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(360deg);
-    }
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 
 @keyframes spin {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 pre {
-    white-space: pre-wrap;       /* Since CSS 2.1 */
-    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-    white-space: -pre-wrap;      /* Opera 4-6 */
-    white-space: -o-pre-wrap;    /* Opera 7 */
-    word-wrap: break-word;       /* Internet Explorer 5.5+ */
-    background-color: transparent;
-    border: none;
-    padding: 0px;
-    margin: 0px;
-    color: inherit;
-    font-size: inherit;
-    line-height: inherit;
-    word-break: unset;
+  white-space: pre-wrap; /* Since CSS 2.1 */
+  white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  word-wrap: break-word; /* Internet Explorer 5.5+ */
+  background-color: transparent;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  word-break: unset;
 }
 
-.alertlogin{
-    margin-bottom: 0px;
+.alertlogin {
+  margin-bottom: 0px;
 }
+

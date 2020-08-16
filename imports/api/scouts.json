@@ -1,9 +1,9 @@
 {
-   "RB": {
-       "descricao":"Roubada de bola",
-       "descricaoPl":"Roubadas de bola",
+   "DS": {
+       "descricao":"Desarme",
+       "descricaoPl":"Desarmes",
        "obs":"",
-       "pts": 1.5
+       "pts": 1
     },
    "FC": {
        "descricao":"Falta cometida",
@@ -36,7 +36,7 @@
        "descricao":"Defesa difícil",
        "descricaoPl":"Defesas difíceis",
        "obs":" - exclusivo para a posição de goleiro",
-       "pts": 3
+       "pts": 4
     },
    "DP": {
        "descricao":"Defesa de pênalti",
@@ -56,11 +56,11 @@
        "obs":"",
        "pts": 0.5
     },
-   "PE": {
-       "descricao":"Passe errado",
-       "descricaoPl":"Passes errados",
+   "PI": {
+       "descricao":"Passe incompleto",
+       "descricaoPl":"Passes incompletos",
        "obs":"",
-       "pts": -0.3
+       "pts": -0.1
     },
    "A": {
        "descricao":"Assistência",

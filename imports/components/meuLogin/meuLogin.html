@@ -1,11 +1,12 @@
 <div id="info">
-  <!-- <div class="list-group center"> -->
-    <!-- <div class="list-group-item"> -->
+  <div class="list-group center" data-ng-show="vm.idCartoleiro">
+    <div class="list-group-item">
+      {{vm.idCartoleiro}}
       <button class="btn btn-danger btn-lg btn-block" ng-click="vm.logout()">
         Sair
       </button>
-    <!-- </div> -->
-  <!-- </div> -->
+    </div>
+  </div>
   <div ng-include="'/client/templates/message.html'"></div>
   <div data-ng-show="vm.time.foto_perfil">
     <div class="list-group center">
