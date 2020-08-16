@@ -31,7 +31,7 @@ class LoginCtrl {
                     "payload": {
                         "email": $scope.user.id,
                         "password": $scope.user.password,
-                        "serviceId": 438
+                        "serviceId": 6860
                     }
                 }
             };
